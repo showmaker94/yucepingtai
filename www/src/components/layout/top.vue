@@ -21,22 +21,22 @@
           <li v-bind:class="{ active: tab===4 }" v-on:click="tab=4"><a href="#">STATS</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
+          <li class="dropdown" v-bind:class="{ open: langOpen===1 }" v-on:click="(langOpen==1)?langOpen=0:langOpen=1">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">English</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">中文（简体）</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">中文（繁体）</a></li>
+              <li><a href="#" v-on:click="langOpen==0" >English</a></li>
+              <li><a href="#" v-on:click="langOpen==0">中文（简体）</a></li>
+              <li><a href="#" v-on:click="langOpen==0">中文（繁体）</a></li>
             </ul>
           </li>
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Keywords, addresses">
-            </div>
-            <button type="submit" class="btn btn-default btn-primary">Search</button>
-          </form>
+          <li>
+            <form class="navbar-form">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Keywords, addresses">
+              </div>
+              <button type="submit" class="btn btn-default btn-primary">Search</button>
+            </form>
+          </li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -52,7 +52,8 @@ export default {
   },
   data(){
     return {
-      tab:1
+      tab:1,
+      langOpen:0
     }
   },
 }
@@ -66,6 +67,7 @@ export default {
 导航底色 #282c34
 按钮底色 #444A58
 按钮按下 #383c4a
+选中蓝色 #5294e2
 */
 
 .navbar-inverse {
@@ -78,6 +80,12 @@ export default {
   background-color: #21252b;
 }
 
+/*dropdown menu*/
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+  background-color: #21252b;
+}
+.dropdown-menu li :hover { background-color: #5294e2}
+
 .navbar-inverse .navbar-toggle {
   border-color: #444A58;
   background-color: #444A58;
@@ -86,5 +94,8 @@ export default {
 .navbar-inverse .navbar-toggle:hover{
   background-color: #282c34;
 }
+
+.dropdown-menu{background-color: #383c4a;border-color:#626773;border-radius: 0px;}
+.dropdown-menu>li>a {color: #fff;}
 
 </style>
