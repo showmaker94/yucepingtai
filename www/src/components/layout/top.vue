@@ -3,17 +3,17 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" v-on:click="(collapseOpen)?collapseOpen=false:collapseOpen=true">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">CoinBet</a>
+        <a class="navbar-brand" href="#" v-on:click="tab=0">CoinBet</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" v-bind:class="{open:collapseOpen}" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
           <li v-bind:class="{ active: tab===1 }" v-on:click="tab=1"><a href="#">BROWSE CONTRACTS</a></li>
           <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><a href="#">CREATE CONTRACT</a></li>
@@ -22,9 +22,9 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown" v-bind:class="{ open: langOpen===1 }" v-on:click="(langOpen==1)?langOpen=0:langOpen=1">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" v-bind:aria-expanded="{ false: langOpen===0,true: langOpen===1 }">Language <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#" v-on:click="langOpen==0" >English</a></li>
+              <li><a href="#" v-on:click="langOpen==0">English</a></li>
               <li><a href="#" v-on:click="langOpen==0">中文（简体）</a></li>
               <li><a href="#" v-on:click="langOpen==0">中文（繁体）</a></li>
             </ul>
@@ -32,7 +32,7 @@
           <li>
             <form class="navbar-form">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Keywords, addresses">
+                <input id="searchInput" type="text" class="form-control" placeholder="Keywords, addresses">
               </div>
               <button type="submit" class="btn btn-default btn-primary">Search</button>
             </form>
@@ -44,17 +44,17 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-
 export default {
   components: {
   },
   data(){
     return {
-      tab:1,
-      langOpen:0
+      tab:0,
+      langOpen:0,
+      collapseOpen:false,
     }
+  },
+  methods:{
   },
 }
 
@@ -68,12 +68,15 @@ export default {
 按钮底色 #444A58
 按钮按下 #383c4a
 选中蓝色 #5294e2
+输入背景 #282c34
+字体白色 #9d9d9d
 */
 
 .navbar-inverse {
   background-color: #282c34;
   border:0px;
   border-color: #282c34;
+  font-weight: bold !important;
 }
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
@@ -88,7 +91,6 @@ export default {
 
 .navbar-inverse .navbar-toggle {
   border-color: #444A58;
-  background-color: #444A58;
 }
 
 .navbar-inverse .navbar-toggle:hover{
@@ -97,5 +99,9 @@ export default {
 
 .dropdown-menu{background-color: #383c4a;border-color:#626773;border-radius: 0px;}
 .dropdown-menu>li>a {color: #fff;}
+
+.open{display:block}
+
+#searchInput{background-color: #282c34;color:#9d9d9d;border-color: #9d9d9d;}
 
 </style>
