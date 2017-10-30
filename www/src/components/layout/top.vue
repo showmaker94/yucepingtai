@@ -15,26 +15,26 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" v-bind:class="{open:collapseOpen}" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
-          <li v-bind:class="{ active: tab===1 }" v-on:click="tab=1"><a href="#">BROWSE CONTRACTS</a></li>
-          <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><a href="#">CREATE CONTRACT</a></li>
+          <li v-bind:class="{ active: tab===1 }" v-on:click="tab=1"><a href="#">{{ $t("top.BrowseContracts") }}</a></li>
+          <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><a href="#">{{ $t("top.CreateContract") }}</a></li>
           <li v-bind:class="{ active: tab===3 }" v-on:click="tab=3"><a href="#">FAQ</a></li>
-          <li v-bind:class="{ active: tab===4 }" v-on:click="tab=4"><a href="#">STATS</a></li>
+          <li v-bind:class="{ active: tab===4 }" v-on:click="tab=4"><a href="#">{{ $t("top.Stat") }}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown" v-bind:class="{ open: langOpen===1 }" v-on:click="(langOpen==1)?langOpen=0:langOpen=1">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" v-bind:aria-expanded="{ false: langOpen===0,true: langOpen===1 }">Language <span class="caret"></span></a>
+          <li class="dropdown" v-bind:class="{ open: langOpen }" v-on:click="(langOpen)?langOpen=false:langOpen=true">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" v-bind:aria-expanded="{ false: langOpen===0,true: langOpen===1 }">{{ $t("top.language") }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#" v-on:click="langOpen==0">English</a></li>
-              <li><a href="#" v-on:click="langOpen==0">中文（简体）</a></li>
-              <li><a href="#" v-on:click="langOpen==0">中文（繁体）</a></li>
+              <li><a href="#" v-on:click="langOpen==false,changeLang('en')">English</a></li>
+              <li><a href="#" v-on:click="langOpen==false,changeLang('zh')">中文（简体）</a></li>
+              <li><a href="#" v-on:click="langOpen==false,changeLang('zh')">中文（繁体）</a></li>
             </ul>
           </li>
           <li>
             <form class="navbar-form">
               <div class="form-group">
-                <input id="searchInput" type="text" class="form-control" placeholder="Keywords, addresses">
+                <input id="searchInput" type="text" class="form-control" v-bind:placeholder='$t("top.searchPlaceholder")'>
               </div>
-              <button type="submit" class="btn btn-default btn-primary">Search</button>
+              <button type="submit" class="btn btn-default btn-primary">{{$t("top.search")}}</button>
             </form>
           </li>
         </ul>
@@ -50,11 +50,14 @@ export default {
   data(){
     return {
       tab:0,
-      langOpen:0,
+      langOpen:false,
       collapseOpen:false,
     }
   },
   methods:{
+    changeLang:function(lang){
+      this.$i18n.locale=lang;
+    }
   },
 }
 
@@ -74,7 +77,7 @@ export default {
 
 .navbar-inverse {
   background-color: #282c34;
-  border:0px;
+  border: 0px;
   border-color: #282c34;
   font-weight: bold !important;
 }
@@ -99,7 +102,6 @@ export default {
 
 .dropdown-menu{background-color: #383c4a;border-color:#626773;border-radius: 0px;}
 .dropdown-menu>li>a {color: #fff;}
-
 .open{display:block}
 
 #searchInput{background-color: #282c34;color:#9d9d9d;border-color: #9d9d9d;}

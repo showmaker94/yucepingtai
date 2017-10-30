@@ -33,7 +33,7 @@ export default {
   components:{
     top,
     bottom,
-  }
+  },
 }
 </script>
 
