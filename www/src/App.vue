@@ -5,16 +5,20 @@
     <div class="container">
       <div class="row">
         <!-- start left sidebar -->
-        <div class="col-md-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">.col-md-1</div>
+        <div class="col-md-3 col-sm-3 col-md-3 col-lg-3 hidden-xs">
+          <leftside></leftside>
+        </div>
         <!-- end left sidebar -->
         <!-- start main content -->
-        <div class="col-sm-8 col-md-8 col-lg-8">
+        <div class="col-sm-6 col-md-6 col-lg-6">
           <img src="./assets/logo.png">
           <router-view/>
         </div>
         <!-- end main content -->
         <!-- start right sidebar -->
-        <div class="col-md-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">.col-md-1</div>
+        <div class="col-md-3 col-sm-3 col-md-3 col-lg-3 hidden-xs">
+          <rightside></rightside>
+        </div>
         <!-- end right sidebar -->
       </div>
     </div>
@@ -27,12 +31,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import top from "./components/layout/top.vue"
 import bottom from "./components/layout/bottom.vue"
+import leftside from "./components/LeftSide.vue"
+import rightside from "./components/RightSide.vue"
 
 export default {
   name: 'app',
   components:{
     top,
     bottom,
+    leftside,
+    rightside,
   },
 }
 </script>
@@ -43,12 +51,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #9d9d9d;
 }
 
 *:focus {outline:none}
 
 body {
   background-color: #21252b;
+  /*background-color: #000;*/
 }
 </style>

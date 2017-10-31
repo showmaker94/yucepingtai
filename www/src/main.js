@@ -4,11 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+//localize plugin vue-i18n
 import VueI18n from 'vue-i18n'
 import messages from './i18n.js'
-
 Vue.use(VueI18n)
-
 const i18n = new VueI18n({
   locale: 'zh',
   messages
