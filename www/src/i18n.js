@@ -7,7 +7,12 @@ module.exports = {
       language: 'language',
       search:'search',
       searchPlaceholder: 'Keywords, addresses',
-    }
+    },
+    sides: {
+      new:'NEW',
+      closing: 'CLOSING SOON',
+      resolved: 'RESOLVED',
+    },
   },
   zh: {
     top: {
@@ -17,6 +22,11 @@ module.exports = {
       language: '选择语言',
       search:'搜索',
       searchPlaceholder: '关键词,地址 ',
-    }
+    },
+    sides: {
+      new:'最新',
+      closing: '即将关闭',
+      resolved: '已结束',
+    },
   }
 }

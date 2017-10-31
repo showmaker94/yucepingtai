@@ -1,5 +1,11 @@
 <template>
   <div class="">
+    <h3>{{ $t("sides.resolved") }}</h3><hr>
+    <contract></contract>
+    <contract></contract>
+    <contract></contract>
+    <contract></contract>
+    <contract></contract>
     <contract></contract>
     <contract></contract>
     <contract></contract>
@@ -17,6 +23,7 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+h3 {text-align: left;margin-top: 20px;margin-bottom: 0px;font-weight: bold;}
+hr {margin-top:0px;margin-bottom: 10px;border:1px #9d9d9d solid; }
 </style>

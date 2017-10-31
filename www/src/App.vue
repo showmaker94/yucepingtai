@@ -56,8 +56,5 @@ export default {
 
 *:focus {outline:none}
 
-body {
-  background-color: #21252b;
-  /*background-color: #000;*/
-}
+body {background-color: #21252b;}
 </style>
