@@ -73,6 +73,8 @@ export default {
 选中蓝色 #5294e2
 输入背景 #282c34
 字体白色 #9d9d9d
+字体蓝色 #61afef
+字体绿色 #98c379
 */
 
 .navbar-inverse {

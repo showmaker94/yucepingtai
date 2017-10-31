@@ -13,6 +13,10 @@ module.exports = {
       closing: 'CLOSING SOON',
       resolved: 'RESOLVED',
     },
+    home: {
+      highroller:"HIGH ROLLER",
+      lastcomments:"LATEST COMMENTS",
+    },
   },
   zh: {
     top: {
@@ -27,6 +31,10 @@ module.exports = {
       new:'最新',
       closing: '即将关闭',
       resolved: '已结束',
+    },
+    home: {
+      highroller:"最热合约",
+      lastcomments:"最新评论",
     },
   }
 }

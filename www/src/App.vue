@@ -11,7 +11,6 @@
         <!-- end left sidebar -->
         <!-- start main content -->
         <div class="col-sm-6 col-md-6 col-lg-6">
-          <img src="./assets/logo.png">
           <router-view/>
         </div>
         <!-- end main content -->
