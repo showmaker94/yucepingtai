@@ -7,19 +7,19 @@
       <!-- <contract :yesbtc="item.totalyesbet" :nobtc="item.totalnobet" :title="item.title" :desc="item.des" :confirbet="item.totalbetnum" :resdate="item.resdate" :bettingends="item.bettingends" :contract_id='item._id'></contract> -->
       <contract :yesbtc="item.totalyesbet" :nobtc="item.totalnobet" :title="item.title" :desc="item.des" :contract_id='item._id' :confirbet="item.totalbetnum" :resdate="item.resdate" :bettingends="item.bettingends" ></contract>
     </div>
-    <button type="button" name="button" class="searchInput" @click='getnewData'>点击加载更多</button>
+    <button type="button" name="button" class="searchInput" @click='getnewData'>{{$t("home.loadmore") }}</button>
   </div>
 
   <h3>{{ $t("home.lastcomments") }}</h3><hr>
   <div class="" v-for="item in comment">
     <comment :postmen="item.name" :postcontent="item.comment" :title="item.title" :time="item.time"></comment>
   </div>
-  <button type="button" name="button" class="searchInput" @click="getnewComment">点击加载更多</button>
-  <h3>最新押注</h3><hr>
+  <button type="button" name="button" class="searchInput" @click="getnewComment">{{$t("home.loadmore") }}</button>
+  <h3>{{ $t("home.latestbet") }}</h3><hr>
   <div class="" v-for='item in bet'>
     <latestbet :innum="item.innum" :title='item.title' :bet='item.bet' :time="item.time"></latestbet>
   </div>
-  <button type="button" name="button" class="searchInput" @click='getnewBet'>点击加载更多</button>
+  <button type="button" name="button" class="searchInput" @click='getnewBet'>{{$t("home.loadmore") }}</button>
 </div>
 </template>
 

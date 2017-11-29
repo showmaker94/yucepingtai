@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="">
-      <h3>所有合约</h3><hr>
+      <h3>{{ $t("browse.allcontract") }}</h3><hr>
       <div class="panel panel-default mypanel">
         <br>
         <div class="form-group">
-          <input type="text" class="form-control panelinput" placeholder="按关键字搜索" v-model="searchTitle">
+          <input type="text" class="form-control panelinput" v-bind:placeholder='$t("top.searchPlaceholder")' v-model="searchTitle">
         </div>
         <div class="panel-body">
 
@@ -53,12 +53,12 @@
 
         </div>
         <div class="" style="padding:10px 0px">
-            <button type="button" class="btn searchbtn" style="background:#444A58" @click="searchcontracts()">搜索</button>
+            <button type="button" class="btn searchbtn" style="background:#444A58" @click="searchcontracts()">{{$t("top.search")}}</button>
         </div>
       </div>
       <div class="panel panel-default mypanel">
           <div class="panel-body">
-            <p class="searchresult">共搜索到{{length}}条信息</p>
+            <p class="searchresult">{{ $t("browse.all") }}&nbsp;&nbsp;{{length}}&nbsp;&nbsp;{{ $t("browse.info") }}</p>
           </div>
       </div>
       <div class="" v-for="item in dataList">

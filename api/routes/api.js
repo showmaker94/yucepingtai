@@ -3,28 +3,8 @@ var router = express.Router();
 var db=require("../public/javascripts/db")
 var mytime=require('./../public/javascripts/log.js');
 var coinapi=require('./bitgogogo.js');
-var ipaddr = require('ipaddr.js');
-// var getip=require("../public/javascripts/ip")
-// var ip = req.headers['x-forwarded-for'] ||
-//     req.ip ||
-//     req.connection.remoteAddress ||
-//     req.socket.remoteAddress ||
-//     req.connection.socket.remoteAddress || '';
-
-// router.get('/ip', function(req, res, next) {
-//
-  // if(ip.split(',').length>0){
-  //     ip = ip.split(',')[0]
-  //   }
-  //  console.log(ipaddr.process(ip));
- // });
-//获取IP
-
 /************************top 开始**************************/
 /* browse search*/
-
-
-
 router.get('/searchbrowse', function(req, res, next) {
   var titleoption={};
   if(req.query.title!=''){
