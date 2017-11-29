@@ -2,12 +2,14 @@
   <!-- <a href="#"> -->
     <div class="comment-wrapper">
       <div class="who">
-        <b style="color: #98c379">Anonymous</b> post in:
-        <b style="color: #61afef">Trump removed within a year</b>
+        <b style="color: #98c379">{{postmen}}</b> post in:
+        <b style="color: #61afef">{{title}}</b><br>
+
+        <b style="color: purple">time</b> &nbsp;{{new Date(time)}}
       </div>
       <hr>
       <div class="comment">
-        It seems that many of the high denomination bets were moved from their addresses months ago. This looks bad. Is there anyone we can contact for info?
+        {{postcontent}}
       <br>
       </div>
     </div>
@@ -16,6 +18,7 @@
 
 <script>
 export default {
+  props:['postmen','postcontent','title','time'],
   components:{
   },
 }

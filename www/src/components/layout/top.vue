@@ -9,15 +9,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#" v-on:click="tab=0">CoinBet</a>
+        <span class="navbar-brand" v-on:click="tab=0"><router-link to="/">CoinBet</router-link></span>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" v-bind:class="{open:collapseOpen}" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
-          <li v-bind:class="{ active: tab===1 }" v-on:click="tab=1"><a href="#">{{ $t("top.BrowseContracts") }}</a></li>
-          <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><a href="#">{{ $t("top.CreateContract") }}</a></li>
-          <li v-bind:class="{ active: tab===3 }" v-on:click="tab=3"><a href="#">FAQ</a></li>
+          <li v-bind:class="{ active: tab===1 }" v-on:click="tab=1"><router-link to="/browse">{{ $t("top.BrowseContracts") }}</router-link></li>
+          <!-- <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><a href="#">{{ $t("top.CreateContract") }}</a></li> -->
+          <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><router-link to="/new">{{ $t("top.CreateContract") }}</router-link></li>
+          <li v-bind:class="{ active: tab===3 }" v-on:click="tab=3"><router-link to="/faq">FAQ</router-link></li>
           <li v-bind:class="{ active: tab===4 }" v-on:click="tab=4"><a href="#">{{ $t("top.Stat") }}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -32,9 +33,9 @@
           <li>
             <form class="navbar-form">
               <div class="form-group">
-                <input id="searchInput" type="text" class="form-control" v-bind:placeholder='$t("top.searchPlaceholder")'>
+                <input id="searchInput" type="text" class="form-control" v-model='searchword' v-bind:placeholder='$t("top.searchPlaceholder")'>
               </div>
-              <button type="submit" class="btn btn-default btn-primary">{{$t("top.search")}}</button>
+              <button id="topbtn" type="button" class="btn btn-default btn-primary" @click='searchData'>{{$t("top.search")}}</button>
             </form>
           </li>
         </ul>
@@ -44,6 +45,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   components: {
   },
@@ -52,11 +54,21 @@ export default {
       tab:0,
       langOpen:false,
       collapseOpen:false,
+      searchword:'',
+      dataList:[]
     }
   },
   methods:{
     changeLang:function(lang){
       this.$i18n.locale=lang;
+    },
+    searchData:function(){
+      if (this.searchword.trim()=='') {
+        this.$router.replace('/')
+      }else {
+        this.$router.replace('/topsearch/'+this.searchword)
+      }
+
     }
   },
 }
@@ -76,7 +88,9 @@ export default {
 字体蓝色 #61afef
 字体绿色 #98c379
 */
-
+a{
+  text-decoration: none;
+}
 .navbar-inverse {
   background-color: #282c34;
   border: 0px;
@@ -107,5 +121,6 @@ export default {
 .open{display:block}
 
 #searchInput{background-color: #282c34;color:#9d9d9d;border-color: #9d9d9d;}
-
+#topbtn{background-color: #282c34;border-color: #9d9d9d; color: #9d9d9d}
+#topbtn:hover{ background-color: #383c4a;color: white;}
 </style>

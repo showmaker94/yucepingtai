@@ -6,7 +6,7 @@ module.exports = {
       Stat: 'STATS',
       language: 'language',
       search:'search',
-      searchPlaceholder: 'Keywords, addresses',
+      searchPlaceholder: 'Keywords',
     },
     sides: {
       new:'NEW',
@@ -25,12 +25,13 @@ module.exports = {
       Stat: '状态',
       language: '选择语言',
       search:'搜索',
-      searchPlaceholder: '关键词,地址 ',
+      searchPlaceholder: '关键词 ',
     },
     sides: {
       new:'最新',
       closing: '即将关闭',
-      resolved: '已结束',
+      resolved: '已解决',
+      closed:'已关闭'
     },
     home: {
       highroller:"最热合约",

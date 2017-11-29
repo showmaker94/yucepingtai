@@ -1,0 +1,30 @@
+{
+  "status":"0",
+  "msg":"",
+  "result":[
+    {
+      "yesBTC":"10",
+      "noBTC":"1",
+      "title":"Trump removed within a year",
+      "des":"If Donald Trump is still president of the USA on May 12th 2018, this bet resolves to 'NO'.If he is not president anymore on or before May 12th 2018, for any reason including but not limited to impeachment this bet resolves to 'YES'.Should a resolution event occur, any 'YES' bet received within two weeks of the event will be refunded, minus BitBet's fee. "
+    },
+    {
+      "yesBTC":"8",
+      "noBTC":"50",
+      "title":"Trump removed within a year",
+      "des":"If Donald Trump is still president of the USA on May 12th 2018, this bet resolves to 'NO'.If he is not president anymore on or before May 12th 2018, for any reason including but not limited to impeachment this bet resolves to 'YES'.Should a resolution event occur, any 'YES' bet received within two weeks of the event will be refunded, minus BitBet's fee."
+    },
+    {
+      "yesBTC":"15",
+      "noBTC":"5",
+      "title":"Trump removed within a year",
+      "des":"If Donald Trump is still president of the USA on May 12th 2018, this bet resolves to 'NO'.If he is not president anymore on or before May 12th 2018, for any reason including but not limited to impeachment this bet resolves to 'YES'.Should a resolution event occur, any 'YES' bet received within two weeks of the event will be refunded, minus BitBet's fee."
+    },
+    {
+      "yesBTC":"0.1",
+      "noBTC":"0.0003",
+      "title":"Trump removed within a year",
+      "des":"If Donald Trump is still president of the USA on May 12th 2018, this bet resolves to 'NO'.If he is not president anymore on or before May 12th 2018, for any reason including but not limited to impeachment this bet resolves to 'YES'.Should a resolution event occur, any 'YES' bet received within two weeks of the event will be refunded, minus BitBet's fee."
+    }
+  ]
+}

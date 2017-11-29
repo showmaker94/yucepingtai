@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+// import $ from 'jquery'
 //localize plugin vue-i18n
 import VueI18n from 'vue-i18n'
 import messages from './i18n.js'
@@ -20,5 +20,8 @@ new Vue({
   router,
   template: '<App/>',
   components: { App },
-  i18n
+  i18n,
+  // data:{
+  //   Bus : new Vue()
+  // }
 })

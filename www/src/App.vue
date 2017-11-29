@@ -25,7 +25,6 @@
     <bottom></bottom>
   </div>
 </template>
-
 <script>
 import 'bootstrap/dist/css/bootstrap.min.css'
 import top from "./components/layout/top.vue"

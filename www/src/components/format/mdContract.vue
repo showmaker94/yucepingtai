@@ -1,15 +1,21 @@
 <template>
   <!-- <a href="#"> -->
-    <div class="contract-wrapper">
+    <div class="contract-wrapper" @click="linkTo()" style="height:300px;overflow:hidden">
       <div class="progress">
-        <div class="leftbar bar">4.5 BTC</div>
-        <div class="rightbar bar">5.5 BTC</div>
+        <div class="yesbar">
+          {{yesbtc}} BCC
+        </div>
+        <div class="nobar">
+          {{nobtc}} BCC
+        </div>
+        <div class="leftbar bar" v-bind:style="{width: YP+'%'}"></div>
+        <div class="rightbar bar" v-bind:style="{width: (100-YP)+'%'}"></div>
       </div>
       <div class="text">
-        <h4 class="title">Bitcoin to top 6000 usd in 2017</h4>
+        <h4 class="title">{{title}}</h4>
         <hr>
         <p>
-          If the price of one Bitcoin goes strictly above 6000 USD strictly before January 1st 2018, this contract resolves to "YES".
+          {{desc}}
         </p>
       </div>
 
@@ -18,9 +24,30 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  props:['yesbtc','nobtc','title','desc','contract_id'],
+  data(){
+    return{
+      title:'',
+      contract_id:''
+    }
+  },
+  computed:{
+    YP:function(){
+
+      return parseFloat(this.yesbtc)/(parseFloat(this.nobtc)+parseFloat(this.yesbtc))*100;
+    }
+  },
   components:{
   },
+  methods:{
+   linkTo:function(){
+     var url="/browse/detail/"+this.contract_id;
+     this.$router.push(url);
+    }
+  }
+
 }
 </script>
 
@@ -55,6 +82,7 @@ hr {margin :4px 0;border:1px #9d9d9d solid; }
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   color: white;
+  position: relative;
 }
 
 .bar {
@@ -62,15 +90,32 @@ hr {margin :4px 0;border:1px #9d9d9d solid; }
   font-weight: bold;
 }
 
+.yesbar{
+  position: absolute;
+  width: 50%;
+  left: 0;
+  top: 0;
+  text-align: left;
+  padding-left: 3px;
+}
+
+.nobar{
+  position: absolute;
+  width: 50%;
+  right: 0;
+  top: 0;
+  text-align: right;
+  padding-right: 3px;
+}
 .leftbar {
-  width:40%;
+  width:50%;
   height: 20px;
   background-color: #e06c75;
   padding-left:4px;
   text-align: left;
 }
 .rightbar {
-  width:60%;
+  width:50%;
   height: 20px;
   background-color: #56b6c2;
   padding-right:4px;
