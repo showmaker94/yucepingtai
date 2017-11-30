@@ -3,8 +3,8 @@
   <div class="">
     <div class="contract-wrapper">
       <div class="progress">
-        <div class="yesbar bar">{{totalyesbet}}BCC</div>
-        <div class="nobar bar">{{totalnobet}}BCC</div>
+        <div class="yesbar bar" style="color:white;font-size:20px">{{totalyesbet}}BCC</div>
+        <div class="nobar bar" style="color:white;font-size:20px">{{totalnobet}}BCC</div>
         <div class="leftbar bar" v-bind:style="{width: YP+'%'}"></div>
         <div class="rightbar bar" v-bind:style="{width: (100-YP)+'%'}"></div>
       </div>

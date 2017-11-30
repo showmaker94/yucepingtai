@@ -49,9 +49,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #9d9d9d;
+  /*color: #9d9d9d;*/
+  background: #21252b;
 }
-
+*{color:#9d9d9d }
 *:focus {outline:none}
 
 body {background-color: #21252b;}

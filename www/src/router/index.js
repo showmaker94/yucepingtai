@@ -9,11 +9,17 @@ import setaddr from '@/components/Setaddress'
 import sendcoin from '@/components/Sendcoin'
 import faq from '@/components/FAQ'
 import topsearch from '@/components/TopSearch'
+import erweima from '@/components/erweima'
 Vue.use(Router)
 
 export default new Router({
-  mode:"history",
+  //mode:"history",
   routes: [
+    {
+      path: '/erweima',
+      name: 'erweima',
+      component: erweima
+    },
     {
       path: '/',
       name: 'home',

@@ -7,8 +7,16 @@
         <div class="text">
           <p>将比特币打到下方地址：</p>
           <p>{{sendcionto}}</p>
-          <div class="">
-            <img src="./../assets/logo.png" style="width:80px;height:80px;"alt="">
+          <!-- <erweima></erweima> -->
+          <div class="" style="margin:0 auto;width:105px">
+            <!-- <img src="./../assets/logo.png" style="width:80px;height:80px;"alt=""> -->
+            <qr-code
+            text="mfgEq2YquXupbM4QvaCeEBBqNSgc3yFegm"
+            size="100"
+            color="#000000"
+            bg-color="#ffffff"
+            error-level="L">
+            </qr-code>
           </div>
           <p>押注：{{title}}</p>
           <p>您的比特币交易收到第一个确认后，您的下注将在确认的堵住清单中显示</p>
@@ -24,6 +32,8 @@
 
 <script>
 import axios from 'axios'
+import qrCode from 'vue-qrcode-component/src/QRCode.vue'
+// import erweima from "./format/erweima.vue"
 export default {
   data:function(){
     return{
@@ -36,6 +46,7 @@ export default {
     this.getSendAddr()
   },
   components:{
+    qrCode
   },
   methods:{
     linkTo:function(){

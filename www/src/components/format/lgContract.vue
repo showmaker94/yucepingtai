@@ -4,10 +4,10 @@
       <div class="progress">
         <!-- <div class="leftbar bar">4.5 BTC</div>
         <div class="rightbar bar">5.5 BTC</div> -->
-        <div class="yesbar">
-          {{yesbtc}} BcC
+        <div class="yesbar" style="color:white;font-size:20px">
+          {{yesbtc}} BCC
         </div>
-        <div class="nobar">
+        <div class="nobar" style="color:white;font-size:20px">
           {{nobtc}} BCC
         </div>
         <div class="leftbar bar" v-bind:style="{width: YP+'%'}"></div>

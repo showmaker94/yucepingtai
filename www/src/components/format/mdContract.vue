@@ -2,10 +2,10 @@
   <!-- <a href="#"> -->
     <div class="contract-wrapper" @click="linkTo()" style="height:300px;overflow:hidden">
       <div class="progress">
-        <div class="yesbar">
+        <div class="yesbar" style="color:white">
           {{yesbtc}} BCC
         </div>
-        <div class="nobar">
+        <div class="nobar" style="color:white">
           {{nobtc}} BCC
         </div>
         <div class="leftbar bar" v-bind:style="{width: YP+'%'}"></div>

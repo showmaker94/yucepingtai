@@ -4,7 +4,7 @@
       <div class="panel panel-default mypanel">
         <br>
         <div class="form-group">
-          <input type="text" class="form-control panelinput" v-bind:placeholder='$t("top.searchPlaceholder")' v-model="searchTitle">
+          <input type="text" style="color:#9d9d9d" class="form-control panelinput" v-bind:placeholder='$t("top.searchPlaceholder")' v-model="searchTitle">
         </div>
         <div class="panel-body">
 

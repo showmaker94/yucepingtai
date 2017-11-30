@@ -6,20 +6,20 @@
     <hr>
     <h4 class="title">标题</h4>
     <div class="form-group pos">
-      <input type="text" class="form-control" placeholder="" v-model="titleval" >
+      <input type="text" class="form-control fontc" placeholder="" v-model="titleval" >
       <span class="glyphicon glyphicon-remove "  :class="{'erricon':titleiserr}" aria-hidden="true" style="position:absolute;right:2%;top:40%"></span>
     </div>
     <h4 class="title">描述</h4>
     <div class="pos">
-      <textarea class="form-control" rows="6" v-model="desval"></textarea>
+      <textarea class="form-control fontc" rows="6" v-model="desval"></textarea>
       <span class="glyphicon glyphicon-remove "  :class="{'erricon':desiserr}" aria-hidden="true" style="position:absolute;right:2%;top:10%"></span>
     </div>
 
 
     <h4 class="title">开奖时间</h4>
-    <div class="pos">
+    <div class="pos fontc">
       <datepicker :readonly="true" format="YYYY-MM-DD" v-model="resdateval" ref="resdate"></datepicker>
-      <span class="glyphicon glyphicon-remove "  :class="{'erricon':resiserr}" aria-hidden="true" style="position:absolute;right:2%;top:40%"></span>
+      <span class="glyphicon glyphicon-remove fontc"  :class="{'erricon':resiserr}" aria-hidden="true" style="position:absolute;right:2%;top:40%"></span>
     </div>
 
 
@@ -31,7 +31,7 @@
       <form class="form-inline">
       <div style="float:left;text-align:left">
           <label>距离公布结果</label>
-          <input type="text" class="form-control" style="width:20%;display:inline-block" v-model="enddateval">
+          <input type="text" class="form-control fontc" style="width:20%;display:inline-block" v-model="enddateval">
           <input id="hiddenText" type="text" style="display:none" />
             <label>天</label>
       </div>
@@ -75,7 +75,7 @@
     <div style="clear:both"></div>
     <h4 class="title">你的收币地址</h4>
     <div class="form-group" style="position:relative">
-      <input type="text" class="form-control" placeholder="" v-model="outaddrval" >
+      <input type="text" class="form-control fontc" placeholder="" v-model="outaddrval" >
       <span class="glyphicon glyphicon-remove "  :class="{'erricon':outaddriserr,'okicon':outaddrisok}" aria-hidden="true" style="position:absolute;right:2%;top:40%"></span>
     </div>
     <h4 class="title">你的押注选项</h4>
@@ -204,6 +204,9 @@ export default {
 </script>
 
 <style lang="css">
+.fontc{
+  color: #9d9d9d;
+}
   .pos{
     position: relative;
   }
@@ -281,4 +284,7 @@ export default {
   .dropdown-menu{background-color: #383c4a;border-color:#626773;border-radius: 0px;}
   .dropdown-menu>li>span {display: block;color: #fff;text-align: center;}
   .open{display:block}
+  *{
+    color: #9d9d9d
+  }
 </style>
