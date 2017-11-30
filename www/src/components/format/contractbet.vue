@@ -238,7 +238,7 @@ export default {
   methods:{
     inputFunc:function(){
       var that=this;
-      axios.get('http://localhost:3000/api/searchContractById',{
+      axios.get('http://120.92.192.127:3000/api/searchContractById',{
         params:{
           contract_id:this.contract_id,
         }
@@ -262,7 +262,7 @@ export default {
     },
     searchData:function(){
       var that=this;
-      axios.get('http://localhost:3000/api/searchContractById',{
+      axios.get('http://120.92.192.127:3000/api/searchContractById',{
         params:{
           contract_id:this.contract_id
         }
@@ -288,7 +288,7 @@ export default {
     },
     searchallbet:function(){
       var that=this;
-      axios.get('http://localhost:3000/api/searchBetById',{
+      axios.get('http://120.92.192.127:3000/api/searchBetById',{
         params:{
           contract_id:this.contract_id,
           isok:'1'
@@ -300,7 +300,7 @@ export default {
     },
     searchComment:function(){
       var that=this;
-      axios.get('http://localhost:3000/api/searchCommentById',{
+      axios.get('http://120.92.192.127:3000/api/searchCommentById',{
         params:{
           contract_id:this.contract_id,
 
@@ -313,7 +313,7 @@ export default {
     postcomment:function(){
       var that=this;
       if (this.postcontent.trim()!='') {
-        axios.get('http://localhost:3000/api/insertComment',{
+        axios.get('http://120.92.192.127:3000/api/insertComment',{
           params:{
             postmen:this.postmen,
             postcontent:this.postcontent,
@@ -331,7 +331,7 @@ export default {
     },
     getPrePage:function(){
       var that=this;
-      axios.get('http://localhost:3000/api/searchCommentById',{
+      axios.get('http://120.92.192.127:3000/api/searchCommentById',{
         params:{
           contract_id:this.contract_id
         }
@@ -347,7 +347,7 @@ export default {
     },
     getNextPage:function(){
       var that=this;
-      axios.get('http://localhost:3000/api/searchCommentById',{
+      axios.get('http://120.92.192.127:3000/api/searchCommentById',{
         params:{
           contract_id:this.contract_id
         }

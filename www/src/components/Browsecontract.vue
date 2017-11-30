@@ -122,7 +122,7 @@ methods:{
   },
   showAllContracts:function(){
     var that =this;
-    axios.get('http://localhost:3000/search',{
+    axios.get('http://120.92.192.127:3000/search',{
       params:{
         type:5
       }
@@ -134,7 +134,7 @@ methods:{
   },
   // searchcomment:function(){
   //   var that =this;
-  //   axios.get('http://localhost:3000/search',{
+  //   axios.get('http://120.92.192.127:3000/search',{
   //     params:{
   //       type:8
   //     }
@@ -149,7 +149,7 @@ methods:{
       return false;
     }
     var that =this;
-    axios.get('http://localhost:3000/search',{
+    axios.get('http://120.92.192.127:3000/search',{
       params:{
         type:7,
         title:this.searchTitle,

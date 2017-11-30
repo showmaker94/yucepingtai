@@ -11,10 +11,10 @@
 
       </div>
       <div class="col-md-3 col-sm-3 col-md-3 col-lg-3">
-        <div class="" style="margin-top:20px;text-align:right;margin-right:20px">
+        <!-- <div class="" style="margin-top:20px;text-align:right;margin-right:20px">
           <b>请登录</b>
           <b>注销</b>
-        </div>
+        </div> -->
 
       </div>
     </div>

@@ -129,7 +129,7 @@ methods:{
       return false;
     }
     var that =this;
-    axios.get('http://localhost:3000/api/searchbrowse',{
+    axios.get('http://120.92.192.127:3000/api/searchbrowse',{
       params:{
         type:7,
         title:this.searchTitle,
@@ -145,7 +145,7 @@ methods:{
   topsearch:function(){
     // alert(this.$route.params.searchword);
     var that =this;
-    axios.get('http://localhost:3000/api/searchinput',{
+    axios.get('http://120.92.192.127:3000/api/searchinput',{
       params:{
         type:12,
         title:this.$route.params.searchword,

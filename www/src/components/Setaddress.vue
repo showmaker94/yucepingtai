@@ -43,7 +43,7 @@ export default {
         var outaddr=this.outaddr;
         var that=this;
         if (outaddr.trim()!='') {
-          axios.get("http://localhost:3000/api/insertbet",{
+          axios.get("http://120.92.192.127:3000/api/insertbet",{
             params:{
               contract_id:contract_id,
               yesorno:yesorno,

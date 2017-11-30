@@ -192,7 +192,7 @@ export default {
         cretime:''
       };
       console.log(data);
-        axios.post('http://localhost:3000/api/creContract',data).then((res)=>{
+        axios.post('http://120.92.192.127:3000/api/creContract',data).then((res)=>{
                 alert("创建成功，等待审核！");
                 this.$router.push("/")
 

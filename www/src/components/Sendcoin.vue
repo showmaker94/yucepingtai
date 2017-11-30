@@ -58,7 +58,7 @@ export default {
     getSendAddr:function(){
       //查询刚才的下注，并且显示收币地址
       var that=this;
-      axios.get("http://localhost:3000/api/showSendAddr",{
+      axios.get("http://120.92.192.127:3000/api/showSendAddr",{
         params:{
           contract_id:this.$route.params.addr,
         }

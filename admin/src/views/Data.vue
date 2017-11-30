@@ -64,7 +64,7 @@
         },
         methods:{
           showAllTitle(){
-            axios.get('http://localhost:3000/api/showAllContracts',{
+            axios.get('http://120.92.192.127:3000/api/showAllContracts',{
               params:{
                 obj1:{},
                 obj2:{'cretime':-1}
@@ -76,7 +76,7 @@
           changeok(id){
             var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
             var isok=document.getElementById(id).value;
-            axios.get('http://localhost:3000/api/updateContractIsOk',{
+            axios.get('http://120.92.192.127:3000/api/updateContractIsOk',{
               params:{
                 contract_id:contract_id,
                 isok:isok
@@ -94,7 +94,7 @@
         changestatus(id){
           var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
           var currentstatus=document.getElementById(id).value;
-          axios.get('http://localhost:3000/api/updateContractStatus',{
+          axios.get('http://120.92.192.127:3000/api/updateContractStatus',{
             params:{
               contract_id:contract_id,
               currentstatus:currentstatus
@@ -120,7 +120,7 @@
         var r=confirm("确定要删除吗？")
         if (r==true) {
           var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
-          axios.get('http://localhost:3000/remove',{
+          axios.get('http://120.92.192.127:3000/remove',{
             params:{
               contract_id:contract_id
             }
@@ -141,7 +141,7 @@
       setbegindate(id){
         var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
         var begindate=document.getElementById(id).value;
-        axios.get('http://localhost:3000/api/updateContractBeginDate',{
+        axios.get('http://120.92.192.127:3000/api/updateContractBeginDate',{
           params:{
             contract_id:contract_id,
             begindate:begindate

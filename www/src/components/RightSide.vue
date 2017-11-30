@@ -30,7 +30,7 @@ export default {
   },
   methods:{
     getsolveData(){
-      axios.get('http://localhost:3000/api/showresolve',{
+      axios.get('http://120.92.192.127:3000/api/showresolve',{
         params:{
           obj1:{
             isok:'1',
@@ -48,7 +48,7 @@ export default {
       })
     },
     getclosedData(){
-      axios.get('http://localhost:3000/api/showclosed',{
+      axios.get('http://120.92.192.127:3000/api/showclosed',{
         params:{
           obj1:{
             isok:'1',

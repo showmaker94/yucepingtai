@@ -35,7 +35,7 @@ export default {
   },
   methods:{
     getnewData(){
-      axios.get('http://localhost:3000/api/shownew',{
+      axios.get('http://120.92.192.127:3000/api/shownew',{
         params:{
             obj1:{
               isok:'1',
@@ -52,7 +52,7 @@ export default {
       })
     },
     getclosingData(){
-      axios.get('http://localhost:3000/api/showclosing',{
+      axios.get('http://120.92.192.127:3000/api/showclosing',{
         params:{
             obj1:{
               isok:'1',

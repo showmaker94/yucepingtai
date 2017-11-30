@@ -59,7 +59,7 @@ export default {
           }else{
               let data = {'username':this.username,'password':this.password}
               /*接口请求*/
-              axios.post('http://localhost:3000/checkuser',data).then((res)=>{
+              axios.post('http://120.92.192.127:3000/checkuser',data).then((res)=>{
                   // console.log(res)
                /*接口的传值是(-1,该用户不存在),(0,密码错误)，同时还会检测管理员账号的值*/
                 if(res.data == '-1'){

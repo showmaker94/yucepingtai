@@ -47,7 +47,7 @@ export default {
   methods:{
     getnewData(){
         var that=this;
-      axios.get('http://localhost:3000/api/showhot',{
+      axios.get('http://120.92.192.127:3000/api/showhot',{
         params:{
           obj1:{
             isok:'1'
@@ -73,7 +73,7 @@ export default {
     },
     getnewComment(){
       var that=this;
-      axios.get('http://localhost:3000/api/showcomment',{
+      axios.get('http://120.92.192.127:3000/api/showcomment',{
         params:{
           obj1:{
           },
@@ -98,7 +98,7 @@ export default {
     },
     getnewBet(){
       var that=this;
-      axios.get('http://localhost:3000/api/showbet',{
+      axios.get('http://120.92.192.127:3000/api/showbet',{
         params:{
           obj1:{
           },

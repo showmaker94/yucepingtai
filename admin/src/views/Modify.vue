@@ -72,7 +72,7 @@ export default {
   },
   methods:{
     sesrchdes(){
-      axios.get('http://localhost:3000/search',{
+      axios.get('http://120.92.192.127:3000/search',{
         params:{
           type:'0',
           contract_id:this.$route.params.contract_id
@@ -102,7 +102,7 @@ export default {
                   }
       /*接口请求*/
       console.log(data);
-      axios.post('http://localhost:3000/modify',data).then((res)=>{
+      axios.post('http://120.92.192.127:3000/modify',data).then((res)=>{
           // console.log(res)
           if(res){
             alert("修改成功")
