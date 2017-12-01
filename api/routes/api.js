@@ -405,8 +405,10 @@ router.post('/sendcoin',function(req, res, next){
       coinapi.sendcoin(data)
       .then((ret)=>{
         console.log(ret);
-        if(ret=='error'){
-          res.json("error");
+        ret=JSON.parse(ret);
+        console.log(ret.msg);
+        if(ret.err!=0){
+          res.json(ret.msg);
         }else {
           db.updateBetIsout(contract_id)
         }

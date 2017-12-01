@@ -129,7 +129,7 @@ sendcoin(id){
     else if (res.data=='outok') {
       alert("返币成功！")
     }else {
-      alert("发生错误！！")
+      alert(res.data)
     }
     this.$router.go(0)
 

@@ -33,23 +33,14 @@ exports.getaddr=()=>{
 
 exports.sendcoin=(data)=>{
   var data=data;
-    // console.log(111);
-    // console.log(data);
-    // console.log(typeof data);
     return new Promise((resolve,reject)=>{
-      // console.log(data);
-      // console.log(222);
-
-      //
-      var data = {
-        "name":"rbtc",
-        "to":"mrc8mmL3BkXh3WbrYXgNnWjuPsmrUmNP5y",
-        "amount":"1"
-      };
+      // var data = {
+      //   "name":"rbtc",
+      //   "to":"mrc8mmL3BkXh3WbrYXgNnWjuPsmrUmNP5y",
+      //   "amount":"1"
+      // };
       // console.log(data);
       data = JSON.stringify(data);
-      // console.log(typeof data);
-      // console.log(data);
       var opt = {
           method: "POST",
           host: "120.92.192.127",
@@ -68,8 +59,6 @@ exports.sendcoin=(data)=>{
               serverFeedback.on('data', function (data) {
                 // body += data;
                 var mydata=data.toString();
-                // console.log(mydata);
-                // console.log(mydata);
                 // mydata=JSON.parse(mydata);
                 return resolve(mydata);
                })
@@ -107,6 +96,7 @@ exports.getinfo=function(){
   // }
     // console.log(message);
     message = message.toString();
+    console.log(message);
     message=JSON.parse(message);
     // 当接收到消息时对数据库进行修改
     var name=message.name;
@@ -126,23 +116,23 @@ exports.getinfo=function(){
     db.searchBet(obj1,obj2) //查到inaddr的押注
     .then((ret)=>{
       // console.log(ret);
-      console.log(11111);
+      // console.log(11111);
       return db.updateBet(ret[0].inaddr,amount) //更新Bet表数据
       // res.json(ret)
     })
     .then((ret)=>{
       //查找到合约表
-      console.log(222222222);
+      // console.log(222222222);
       bet=ret.bet; //记录该条数据押注 yes  还是  no
       innum=ret.innum;  //记录 押入的 BCC 数量
-      console.log(innum);
+      // console.log(innum);
       id=ret.contract_id;
       return db.searchContractById(ret.contract_id);
     })
     .then((ret)=>{
-      console.log(ret);
+      // console.log(ret);
       //更新合约表数据
-      console.log(333333);
+      // console.log(333333);
       return db.updateContract(ret[0]._id,ret[0].totalbet,ret[0].totalyesbet,ret[0].totalnobet,ret[0].totalbetnum,ret[0].nobetnum,ret[0].yesbetnum,bet,amount,isjoin);
     })
     .then((ret)=>{
@@ -151,16 +141,16 @@ exports.getinfo=function(){
     })
     .then((ret)=>{
       //在次更新Bet表，更新outnum字段
-      console.log(444444444);
-      console.log(ret);
+      // console.log(444444444);
+      // console.log(ret);
       var outnum=0;
       console.log(bet);
       if (bet=='yes') {
-        console.log(ret[0].totalbet);
-        console.log(ret[0].totalyesbet);
-        console.log(innum);
+        // console.log(ret[0].totalbet);
+        // console.log(ret[0].totalyesbet);
+        // console.log(innum);
         outnum=((((ret[0].totalbet)*0.98)/(ret[0].totalyesbet))*amount).toFixed(5);
-        console.log(outnum);
+        // console.log(outnum);
       }else if (bet=='no') {
         outnum=((((ret[0].totalbet)*0.98)/(ret[0].totalnobet))*amount).toFixed(5);
       }
