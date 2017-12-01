@@ -12,7 +12,7 @@
               <input type="text" v-model="outaddr">
             </div>
             <div class="">
-              <p>注：如果你将收币地址和押注时冲币的地址写的一样的话，这种方式可能会让你的比特币丢失！</p>
+              <p>注：如果你将收币地址和押注时冲币的地址写的一样的话，这种方式可能会让你的BCC丢失！</p>
             </div>
               <button type="button" name="button" class="postbtn" @click="linkTo()">提交</button>
         </div>

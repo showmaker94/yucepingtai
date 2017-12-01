@@ -1,11 +1,11 @@
 <template>
   <!-- <a href="#"> -->
   <div class="">
-    <h4 class="title">发出你的比特币</h4>
+    <h4 class="title">发出你的BCC</h4>
     <hr>
       <div class="contract-wrapper">
         <div class="text">
-          <p>将比特币打到下方地址：</p>
+          <p>将BCC打到下方地址：</p>
           <p>{{sendcionto}}</p>
           <!-- <erweima></erweima> -->
           <div class="" style="margin:0 auto;width:105px">
@@ -19,7 +19,7 @@
             </qr-code>
           </div>
           <p>押注：{{title}}</p>
-          <p>您的比特币交易收到第一个确认后，您的下注将在确认的堵住清单中显示</p>
+          <p>您的BCC交易收到第一个确认后，您的下注将在确认的堵住清单中显示</p>
               <button type="button" name="button" class="postbtn" @click="linkTo()">返回</button>
         </div>
 

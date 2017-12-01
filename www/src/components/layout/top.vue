@@ -14,17 +14,17 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" v-bind:class="{open:collapseOpen}" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-left">
-          <li v-bind:class="{ active: tab===1 }" v-on:click="tab=1"><router-link to="/browse">{{ $t("top.BrowseContracts") }}</router-link></li>
+        <ul class="nav navbar-nav navbar-left" >
+          <li v-bind:class="{ active: tab===1 }" v-on:click="tab=1,(collapseOpen)?collapseOpen=false:collapseOpen=true"><router-link to="/browse">{{ $t("top.BrowseContracts") }}</router-link></li>
           <!-- <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><a href="#">{{ $t("top.CreateContract") }}</a></li> -->
-          <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2"><router-link to="/new">{{ $t("top.CreateContract") }}</router-link></li>
-          <li v-bind:class="{ active: tab===3 }" v-on:click="tab=3"><router-link to="/faq">FAQ</router-link></li>
-          <li v-bind:class="{ active: tab===4 }" v-on:click="tab=4"><a href="#">{{ $t("top.Stat") }}</a></li>
+          <li v-bind:class="{ active: tab===2 }" v-on:click="tab=2,(collapseOpen)?collapseOpen=false:collapseOpen=true"><router-link to="/new">{{ $t("top.CreateContract") }}</router-link></li>
+          <li v-bind:class="{ active: tab===3 }" v-on:click="tab=3,(collapseOpen)?collapseOpen=false:collapseOpen=true"><router-link to="/faq">FAQ</router-link></li>
+          <li v-bind:class="{ active: tab===4 }" v-on:click="tab=4,(collapseOpen)?collapseOpen=false:collapseOpen=true"><a href="#">{{ $t("top.Stat") }}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown" v-bind:class="{ open: langOpen }" v-on:click="(langOpen)?langOpen=false:langOpen=true">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" v-bind:aria-expanded="{ false: langOpen===0,true: langOpen===1 }">{{ $t("top.language") }} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="text-align:center">
               <li><a href="#" v-on:click="langOpen==false,changeLang('en')">English</a></li>
               <li><a href="#" v-on:click="langOpen==false,changeLang('zh')">中文（简体）</a></li>
               <li><a href="#" v-on:click="langOpen==false,changeLang('zh')">中文（繁体）</a></li>

@@ -167,10 +167,6 @@ methods:{
 </script>
 
 <style lang="css">
-option{
-  border: none;
-  color: red;
-}
 .mypanel{
   border: none;
 }
@@ -180,12 +176,12 @@ option{
   width: 60%;
   background: #282c34;
 }
-.option{
+/*.option{
   margin-left: 10%;
   margin-bottom: 2%;
   float: left;
   width: 50%
-}
+}*/
 .panel-body{
   padding: 0;
 }
@@ -206,12 +202,12 @@ option{
 a{
   text-decoration: none;
 }
-.navbar-inverse {
+/*.navbar-inverse {
   background-color: #282c34;
   border: 0px;
   border-color: #282c34;
   font-weight: bold !important;
-}
+}*/
 .mypanel .navbar-nav{
   margin-left: 10%;
   margin-top: 5%;
@@ -220,24 +216,31 @@ a{
   padding: 7px 10px;
   width: 200px;
 }
-.mypanel .nav > li > a{
+.mypanel .navbar-nav > li > span{
+  display: block;
+  padding: 7px 10px;
+  width: 200px;
+}
+.mypanel .nav > li > span{
+  display: block;
   border: 1px solid #9d9d9d;
   color: #9d9d9d;
 }
-.mypanel .nav > li > a:focus, .mypanel .nav > li > a:hover{
+.mypanel .nav > li > span:focus, .mypanel .nav > li > span:hover{
     background-color: #282c34;;
     border: 1px solid #9d9d9d;
 }
-.mypanel .nav .open > a, .mypanel .nav .open > a:focus, .mypanel .nav .open > a:hover{
+.mypanel .nav .open > span, .mypanel .nav .open > span:focus, .mypanel .nav .open > span:hover{
   background-color: #282c34;;
   border: 1px solid #9d9d9d;
 }
-/*dropdown menu*/
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+.navbar-inverse .navbar-nav>.open>span, .navbar-inverse .navbar-nav>.open>span:focus, .navbar-inverse .navbar-nav>.open>span:hover{
   background-color: #21252b;
 }
 .mypanel .dropdown-menu li :hover { background-color: #5294e2}
-
+.mypanel .dropdown-menu li span{
+  width: 190px
+}
 .navbar-inverse .navbar-toggle {
   border-color: #444A58;
 }
@@ -247,6 +250,6 @@ a{
 }
 
 .dropdown-menu{background-color: #383c4a;border-color:#626773;border-radius: 0px;}
-.dropdown-menu>li>a {color: #fff;}
+.dropdown-menu>li>span {display: block;color: #fff;text-align: center;}
 .open{display:block}
 </style>

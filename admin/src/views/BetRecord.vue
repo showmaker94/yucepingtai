@@ -73,7 +73,7 @@ export default {
   },
   methods:{
     showAllData(){
-      axios.get('http://120.92.192.127:3000/api/searchBetById',{
+      axios.get('http://120.92.192.120:3000/api/searchBetById',{
         params:{
           contract_id:this.$route.params.contract_id,
           isok:''
@@ -85,7 +85,7 @@ export default {
     changeok(id){
       var time=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
       var isok=document.getElementById(id).value;
-      axios.get('http://120.92.192.127:3000/api/updateBetStatus',{
+      axios.get('http://120.92.192.120:3000/api/updateBetStatus',{
         params:{
           time:time,
           isok:isok
@@ -96,7 +96,7 @@ export default {
     changejoin(id){
       var time=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
       var isjoin=document.getElementById(id).value;
-      axios.get('http://120.92.192.127:3000/api/updateBetJoinStatus',{
+      axios.get('http://120.92.192.120:3000/api/updateBetJoinStatus',{
         params:{
           time:time,
           isjoin:isjoin
@@ -108,7 +108,7 @@ export default {
 
   },
   searchType(){
-    axios.get('http://120.92.192.127:3000/api/searchType',{
+    axios.get('http://120.92.192.120:3000/api/searchType',{
       params:{
         type:this.searchBetType,
         contract_id:this.$route.params.contract_id,
@@ -121,7 +121,7 @@ sendcoin(id){
   var id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
   let data = {'id':id}
   /*接口请求*/
-  axios.post('http://120.92.192.127:3000/api/sendcoin',data).then((res)=>{
+  axios.post('http://120.92.192.120:3000/api/sendcoin',data).then((res)=>{
     console.log(res);
     if (res.data=='outed') {
       alert("已经返过币了！！！！！")
