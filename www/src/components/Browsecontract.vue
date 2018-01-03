@@ -3,9 +3,9 @@
       <h3>{{ $t("browse.allcontract") }}</h3><hr>
       <div class="panel panel-default mypanel">
         <br>
-        <div class="form-group">
+        <!-- <div class="form-group"> -->
           <input type="text" style="color:#9d9d9d" class="form-control panelinput" v-bind:placeholder='$t("top.searchPlaceholder")' v-model="searchTitle">
-        </div>
+        <!-- </div> -->
         <div class="panel-body">
 
           <div class="mypanel">
@@ -77,13 +77,13 @@
 </template>
 
 <script>
-import axios from 'axios'
 import contract from "./format/lgContract.vue"
 import comment from "./format/comment.vue"
 export default {
   data(){
     return {
       tab:0,
+      langOpen:'',
       langOpen0:false,
       langOpen1:false,
       langOpen2:false,
@@ -122,7 +122,7 @@ methods:{
   },
   showAllContracts:function(){
     var that =this;
-    axios.get('http://120.92.192.127:3000/search',{
+    this.$http.get('search',{
       params:{
         type:5
       }
@@ -134,7 +134,7 @@ methods:{
   },
   // searchcomment:function(){
   //   var that =this;
-  //   axios.get('http://120.92.192.127:3000/search',{
+  //   this.$http.get('search',{
   //     params:{
   //       type:8
   //     }
@@ -149,7 +149,7 @@ methods:{
       return false;
     }
     var that =this;
-    axios.get('http://120.92.192.127:3000/search',{
+    this.$http.get('search',{
       params:{
         type:7,
         title:this.searchTitle,
@@ -173,7 +173,7 @@ methods:{
 .panelinput{
   margin-left: 10%;
   margin-top: 5%;
-  width: 60%;
+  width: 260px;
   background: #282c34;
 }
 /*.option{
@@ -187,7 +187,8 @@ methods:{
 }
 .searchbtn{
   margin-top: 5%;
-  margin-left: 80%
+  margin-left: 70%;
+  width: 80px;
 }
 .searchbtn:hover{
   color: white;
@@ -219,7 +220,7 @@ a{
 .mypanel .navbar-nav > li > span{
   display: block;
   padding: 7px 10px;
-  width: 200px;
+  width: 260px;
 }
 .mypanel .nav > li > span{
   display: block;
@@ -239,10 +240,12 @@ a{
 }
 .mypanel .dropdown-menu li :hover { background-color: #5294e2}
 .mypanel .dropdown-menu li span{
-  width: 190px
+  width: 260px;
+  padding:5px;
 }
 .navbar-inverse .navbar-toggle {
   border-color: #444A58;
+
 }
 
 .navbar-inverse .navbar-toggle:hover{

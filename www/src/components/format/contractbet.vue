@@ -3,13 +3,13 @@
   <div class="">
     <div class="contract-wrapper">
       <div class="progress">
-        <div class="yesbar bar" style="color:white;font-size:20px">{{totalyesbet}}BCC</div>
-        <div class="nobar bar" style="color:white;font-size:20px">{{totalnobet}}BCC</div>
+        <div class="yesbar bar" style="color:white;font-size:20px">{{totalyesbet}}Tcash</div>
+        <div class="nobar bar" style="color:white;font-size:20px">{{totalnobet}}Tcash</div>
         <div class="leftbar bar" v-bind:style="{width: YP+'%'}"></div>
         <div class="rightbar bar" v-bind:style="{width: (100-YP)+'%'}"></div>
       </div>
       <div class="text">
-        <h2 class="title">{{title}}</h2>
+        <h4 class="title">{{title}}</h4>
         <hr>
         <div class="">
           <p>{{des}}
@@ -20,8 +20,8 @@
       <div class="bottom">
         <!-- <div class="bottom-left">Confirmed Bets: <b>54</b></div> -->
         <!-- <div class="bottom-right">Closing in: <b>6 months 1 week</b></div> -->
-        <button type="button" name="button"  class="detailbtn detailbtny" @click="linkToyes()">YES</button>
-        <button type="button" name="button" class="detailbtn detailbtnn"  @click="linkTono()">NO</button>
+        <span   class="detailbtn detailbtny" @click="linkToyes()">YES</span>
+        <span   class="detailbtn detailbtnn" @click="linkTono()">NO</span>
       </div>
     </div>
     <div class="contract-wrapper">
@@ -94,13 +94,13 @@
           <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>计算
         </div>
         <div class="detail detail-right">
-            <p>投注 <input class="calinput" type="text" name="" value="" v-model='inval' v-on:input ="inputFunc">BCC</p>
+            <p>投注 <input class="calinput" type="text" name="" value="" v-model='inval' v-on:input ="inputFunc">Tcash</p>
             <p><b>YES </b>pays:<span>{{yesout}}</span></p>
             <p><b>NO </b>pays:<span>{{noout}}</span></p>
         </div>
       </div>
     </div>
-      <h4 class="title">确认的投注共 <b>{{totalbet}}</b>BCC</h4>
+      <h4 class="title">确认的投注共 <b>{{totalbet}}</b>Tcash</h4>
     <div class="contract-wrapper">
       <div class="text" style="overflow:scroll;overflow-y:hidden">
         <table class="table table-condensed">
@@ -171,7 +171,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   props:['contract_id'],
   filters:{
@@ -210,7 +209,8 @@ export default {
         totalnobet:'',
         yesout:'',
         noout:'',
-        inval:''
+        inval:'',
+        langOpen:''
     }
   },
   components:{
@@ -238,15 +238,15 @@ export default {
   methods:{
     inputFunc:function(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/searchContractById',{
+      this.$http.get('api/searchContractById',{
         params:{
           contract_id:this.contract_id,
         }
       }).then(function(response){
-        console.log(response.data[0].totalbet);
-        console.log(response.data[0].totalyesbet);
-        console.log(response.data[0].totalnobet);
-        console.log(that.inval);
+        // console.log(response.data[0].totalbet);
+        // console.log(response.data[0].totalyesbet);
+        // console.log(response.data[0].totalnobet);
+        // console.log(that.inval);
         that.yesout=(((Number(that.totalbet)+Number(that.inval))*0.98)/(Number(that.totalyesbet)+Number(that.inval))*Number(that.inval)).toFixed(5);
         that.noout=(((Number(that.totalbet)+Number(that.inval))*0.98)/(Number(that.totalnobet)+Number(that.inval))*Number(that.inval)).toFixed(5);
 
@@ -262,7 +262,7 @@ export default {
     },
     searchData:function(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/searchContractById',{
+      this.$http.get('api/searchContractById',{
         params:{
           contract_id:this.contract_id
         }
@@ -288,7 +288,7 @@ export default {
     },
     searchallbet:function(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/searchBetById',{
+      this.$http.get('api/searchBetById',{
         params:{
           contract_id:this.contract_id,
           isok:'1'
@@ -300,7 +300,7 @@ export default {
     },
     searchComment:function(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/searchCommentById',{
+      this.$http.get('api/searchCommentById',{
         params:{
           contract_id:this.contract_id,
 
@@ -313,11 +313,12 @@ export default {
     postcomment:function(){
       var that=this;
       if (this.postcontent.trim()!='') {
-        axios.get('http://120.92.192.127:3000/api/insertComment',{
+        this.$http.get('api/insertComment',{
           params:{
             postmen:this.postmen,
             postcontent:this.postcontent,
-            contract_id:this.contract_id
+            contract_id:this.contract_id,
+            title:this.title
           }
         });
         document.getElementById("contentarea").value="";
@@ -331,7 +332,7 @@ export default {
     },
     getPrePage:function(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/searchCommentById',{
+      this.$http.get('api/searchCommentById',{
         params:{
           contract_id:this.contract_id
         }
@@ -347,7 +348,7 @@ export default {
     },
     getNextPage:function(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/searchCommentById',{
+      this.$http.get('api/searchCommentById',{
         params:{
           contract_id:this.contract_id
         }
@@ -379,6 +380,7 @@ hr {margin :4px 0;border:1px #9d9d9d solid; }
   border-radius: 4px;
   background-color: #282c34;
   margin-bottom: 20px;
+  font-size: 13px;
 }
 
 .contract-wrapper:hover{
@@ -438,15 +440,24 @@ hr {margin :4px 0;border:1px #9d9d9d solid; }
   padding-right: 3px;
 }
 .text { padding : 3px;}
-
+p {
+  font-size: 15px;
+  text-align: left;
+}
+@media screen and (max-width:500px) {
+  p {
+    font-size: 13px;
+    text-align: left;
+  }
+}
 .title{font-weight: bold}
 
 /*p{padding:24px;font-size:18px;}*/
 
 .bottom{padding:10px;}
-.detailbtn{text-align: center;padding: 7px 5px;border: none;color: #ffffff}
-.detailbtny {width:35%;display:inline-block;margin-right: 20px;background-color: #e06c75}
-.detailbtnn {width:35%;display:inline-block;margin-left: 20px;background-color: #56b6c2}
+.detailbtn{text-align: center;padding: 4px 5px;border: none;color: #ffffff;border-radius: 3px;}
+.detailbtny {width:25%;display:inline-block;margin-right: 30px;background-color: #e06c75}
+.detailbtnn {width:25%;display:inline-block;margin-left: 30px;background-color: #56b6c2}
 
 </style>
 <style scoped>
@@ -474,7 +485,7 @@ div {margin:0;}
 }
 .detail{
   display: inline-block;
-  padding: 10px;
+  padding: 5px 0px;
   width: 40%;
 }
 .detail-left{

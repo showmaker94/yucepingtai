@@ -11,10 +11,11 @@
               <span>收币地址</span>
               <input type="text" v-model="outaddr">
             </div>
-            <div class="">
-              <p>注：如果你将收币地址和押注时冲币的地址写的一样的话，这种方式可能会让你的BCC丢失！</p>
+            <div class="notice">
+              <p>注：如果你将收币地址和押注时冲币的地址写的一样的话，这种方式可能会让你的Tcash丢失！</p>
+              <span class="postbtn" @click="linkTo()">提交</span>
             </div>
-              <button type="button" name="button" class="postbtn" @click="linkTo()">提交</button>
+
         </div>
 
         </div>
@@ -25,29 +26,43 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data:function(){
     return{
       addr:'',
       outaddr:'',
-      betid:''
+      betid:'',
+      title:''
     }
   },
   components:{
+  },
+  mounted:function(){
+    var that = this
+    this.$http.get('api/searchContractById',{
+      params:{
+        contract_id:this.$route.params.contract_id
+      }
+    }).then(function(response){
+      // console.log(response.data[0]);
+        that.title = response.data[0].title;
+        // console.log(that.title);
+    })
   },
   methods:{
       linkTo:function(){
         var contract_id=this.$route.params.contract_id;
         var yesorno=this.$route.params.yesorno;
         var outaddr=this.outaddr;
+        var title = this.title
         var that=this;
         if (outaddr.trim()!='') {
-          axios.get("http://120.92.192.127:3000/api/insertbet",{
+          this.$http.get("api/insertbet",{
             params:{
               contract_id:contract_id,
               yesorno:yesorno,
-              outaddr:outaddr
+              outaddr:outaddr,
+              title:title
             }
           }).then(function(res){
             // console.log(typeof res);
@@ -93,13 +108,23 @@ hr {margin :4px 0;border:1px #9d9d9d solid; }
   box-shadow: 0 0 10px #61afef;
 }
 
-.text { padding : 3px;}
-
+.text { padding : 3px;height: 400px;}
+.text .notice span {
+  display: block;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin-top: 50px;
+}
 .title{font-weight: bold;text-align: left;}
 
 p{font-size:14px;padding: 10px;text-align: left;}
 .comment{
   padding: 10px
+}
+input{
+  width: 300px;
 }
 .comment input,.comment textarea{
   background: #282c34;

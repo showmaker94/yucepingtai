@@ -120,7 +120,7 @@ a{
 .dropdown-menu>li>a {color: #fff;}
 .open{display:block}
 
-#searchInput{background-color: #282c34;color:#9d9d9d;border-color: #9d9d9d;}
+#searchInput{background-color: #282c34;color:#9d9d9d;border-color: #9d9d9d;width: 92%;margin: 0 auto;}
 #topbtn{background-color: #282c34;border-color: #9d9d9d; color: #9d9d9d}
 #topbtn:hover{ background-color: #383c4a;color: white;}
 </style>

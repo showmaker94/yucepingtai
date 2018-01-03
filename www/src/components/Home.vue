@@ -19,7 +19,7 @@
   <div class="" v-for='item in bet'>
     <latestbet :innum="item.innum" :title='item.title' :bet='item.bet' :time="item.time"></latestbet>
   </div>
-  <button type="button" name="button" class="searchInput" @click='getnewBet'>{{$t("home.loadmore") }}</button>
+  <button type="button" name="button" class="searchInput" @click='getnewBetClick'>{{$t("home.loadmore") }}</button>
 </div>
 </template>
 
@@ -27,7 +27,6 @@
 import contract from "./format/lgContract.vue"
 import comment from "./format/comment.vue"
 import latestbet from "./format/latestbet.vue"
-import axios from "axios"
 export default {
   data(){
     return{
@@ -47,7 +46,7 @@ export default {
   methods:{
     getnewData(){
         var that=this;
-      axios.get('http://120.92.192.127:3000/api/showhot',{
+      this.$http.get('api/showhot',{
         params:{
           obj1:{
             isok:'1'
@@ -73,7 +72,7 @@ export default {
     },
     getnewComment(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/showcomment',{
+      this.$http.get('api/showcomment',{
         params:{
           obj1:{
           },
@@ -98,7 +97,34 @@ export default {
     },
     getnewBet(){
       var that=this;
-      axios.get('http://120.92.192.127:3000/api/showbet',{
+      this.$http.get('api/showbet',{
+        params:{
+          obj1:{
+            isok:1
+          },
+          obj2:{
+            time:-1
+          }
+          }
+      }
+    ).then((result)=>{
+      var res=result.data;
+      if (that.latestbetnum==0) {
+        that.latestbetnum=4;
+      }
+      else if ( (that.latestbetnum+4)<res.length) {
+        that.latestbetnum+=4
+      }
+      else {
+        that.latestbetnum=res.length;
+      }
+      // console.log(that.hotcontractnum);
+      this.bet=res.slice(0,that.latestbetnum);
+      })
+    },
+    getnewBetClick(){
+      var that=this;
+      this.$http.get('api/showbet',{
         params:{
           obj1:{
           },
@@ -109,6 +135,11 @@ export default {
       }
     ).then((result)=>{
       var res=result.data;
+      // console.log(res.length);
+      if (res.length<5 || res.length==that.latestbetnum) {
+        alert("没有更多")
+        return
+      }
       if (that.latestbetnum==0) {
         that.latestbetnum=4;
       }
@@ -135,5 +166,9 @@ export default {
 <style scoped>
 h3 {text-align: left;margin-top: 20px;margin-bottom: 0px;font-weight: bold;}
 hr {margin-top:0px;margin-bottom: 10px;border:1px #9d9d9d solid; }
-.searchInput{background-color: #282c34;font-weight: bold;;color:#9d9d9d;border: 1px solid #9d9d9d;padding: 5px ;border-radius: 3px}
+.searchInput
+{
+  width: 100%;background-color: #282c34;font-weight: bold;;
+  color:#9d9d9d;border: 1px solid #9d9d9d;padding: 5px ;border-radius: 3px
+}
 </style>

@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data(){
     return{
@@ -73,7 +72,7 @@ export default {
   },
   methods:{
     showAllData(){
-      axios.get('http://120.92.192.120:3000/api/searchBetById',{
+      this.$http.get('api/searchBetById',{
         params:{
           contract_id:this.$route.params.contract_id,
           isok:''
@@ -83,20 +82,27 @@ export default {
       })
     },
     changeok(id){
-      var time=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
+      var betid=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
       var isok=document.getElementById(id).value;
-      axios.get('http://120.92.192.120:3000/api/updateBetStatus',{
+      // console.log(time);
+      this.$http.get('api/updateBetStatus',{
         params:{
-          time:time,
+          betid:betid,
           isok:isok
         }
       }).then((res)=>{
-      alert("修改成功")
+        // console.log(res);
+        if (res.data==null) {
+          alert("修改失败")
+        }else{
+          alert("修改成功")
+        }
+        location.reload()
     })},
     changejoin(id){
       var time=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
       var isjoin=document.getElementById(id).value;
-      axios.get('http://120.92.192.120:3000/api/updateBetJoinStatus',{
+      this.$http.get('api/updateBetJoinStatus',{
         params:{
           time:time,
           isjoin:isjoin
@@ -108,7 +114,7 @@ export default {
 
   },
   searchType(){
-    axios.get('http://120.92.192.120:3000/api/searchType',{
+    this.$http.get('api/searchType',{
       params:{
         type:this.searchBetType,
         contract_id:this.$route.params.contract_id,
@@ -121,7 +127,7 @@ sendcoin(id){
   var id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
   let data = {'id':id}
   /*接口请求*/
-  axios.post('http://120.92.192.120:3000/api/sendcoin',data).then((res)=>{
+  this.$http.post('api/sendcoin',data).then((res)=>{
     console.log(res);
     if (res.data=='outed') {
       alert("已经返过币了！！！！！")

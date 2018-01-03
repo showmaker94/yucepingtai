@@ -9,7 +9,6 @@
 
 <script>
 import faq from './format/faq.vue'
-import axios from "axios"
 export default {
   data(){
     return{
@@ -24,7 +23,7 @@ export default {
   },
   methods:{
     getData(){
-      axios.get("faqData").then((result)=>{
+      this.$http.get("faqData").then((result)=>{
         var res=result.data;
         this.dataList=res.result;
       })

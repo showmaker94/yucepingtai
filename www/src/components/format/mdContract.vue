@@ -3,10 +3,10 @@
     <div class="contract-wrapper" @click="linkTo()" style="height:300px;overflow:hidden">
       <div class="progress">
         <div class="yesbar" style="color:white">
-          {{yesbtc}} BCC
+          {{yesbtc}} Tcash
         </div>
         <div class="nobar" style="color:white">
-          {{nobtc}} BCC
+          {{nobtc}} Tcash
         </div>
         <div class="leftbar bar" v-bind:style="{width: YP+'%'}"></div>
         <div class="rightbar bar" v-bind:style="{width: (100-YP)+'%'}"></div>
@@ -29,8 +29,6 @@ export default {
   props:['yesbtc','nobtc','title','desc','contract_id'],
   data(){
     return{
-      title:'',
-      contract_id:''
     }
   },
   computed:{
@@ -128,5 +126,12 @@ hr {margin :4px 0;border:1px #9d9d9d solid; }
 
 h4 {text-align: left}
 
-p{text-align: left}
+p{text-align: left;
+display: -webkit-box;
+text-overflow: ellipsis;
+overflow : hidden;
+text-overflow: ellipsis;
+-webkit-line-clamp: 11;
+-webkit-box-orient: vertical;
+}
 </style>

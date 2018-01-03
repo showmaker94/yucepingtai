@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data(){
     return{
@@ -72,7 +71,7 @@ export default {
   },
   methods:{
     sesrchdes(){
-      axios.get('http://localhost:3000/search',{
+      this.$http.get('search',{
         params:{
           type:'0',
           contract_id:this.$route.params.contract_id
@@ -102,7 +101,7 @@ export default {
                   }
       /*接口请求*/
       console.log(data);
-      axios.post('http://localhost:3000/modify',data).then((res)=>{
+      this.$http.post('modify',data).then((res)=>{
           // console.log(res)
           if(res){
             alert("修改成功")

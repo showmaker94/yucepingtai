@@ -77,7 +77,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import contract from "./format/lgContract.vue"
 import comment from "./format/comment.vue"
 export default {
@@ -129,7 +128,7 @@ methods:{
       return false;
     }
     var that =this;
-    axios.get('http://120.92.192.127:3000/api/searchbrowse',{
+    this.$http.get('api/searchbrowse',{
       params:{
         type:7,
         title:this.searchTitle,
@@ -145,7 +144,7 @@ methods:{
   topsearch:function(){
     // alert(this.$route.params.searchword);
     var that =this;
-    axios.get('http://120.92.192.127:3000/api/searchinput',{
+    this.$http.get('api/searchinput',{
       params:{
         type:12,
         title:this.$route.params.searchword,

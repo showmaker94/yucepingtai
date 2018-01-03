@@ -5,16 +5,16 @@
         <!-- <div class="leftbar bar">4.5 BTC</div>
         <div class="rightbar bar">5.5 BTC</div> -->
         <div class="yesbar" style="color:white;font-size:20px">
-          {{yesbtc}} BCC
+          {{yesbtc}} Tcash
         </div>
         <div class="nobar" style="color:white;font-size:20px">
-          {{nobtc}} BCC
+          {{nobtc}} Tcash
         </div>
         <div class="leftbar bar" v-bind:style="{width: YP+'%'}"></div>
         <div class="rightbar bar" v-bind:style="{width: (100-YP)+'%'}"></div>
       </div>
       <div class="text">
-        <h2 class="title">{{title}}</h2>
+        <h4 class="title">{{title}}</h4>
         <hr>
         <div class="">
           <p>{{desc}}
@@ -35,8 +35,6 @@ export default {
   props:['yesbtc','nobtc','title','desc','confirbet','resdate','bettingends','contract_id'],
   data(){
     return{
-      resdate:'',
-      contract_id:''
     }
   },
   computed:{
@@ -133,7 +131,10 @@ hr {margin :4px 0;border:1px #9d9d9d solid; }
 
 .title{font-weight: bold}
 
-p{padding:24px;font-size:18px;}
+p{padding:24px;
+  font-size:15px;
+  text-align: left;
+}
 
 .bottom{padding:1px;}
 .bottom-left {text-align: left;width:49%;display:inline-block;}

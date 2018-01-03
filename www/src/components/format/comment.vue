@@ -5,7 +5,7 @@
         <b style="color: #98c379">{{postmen}}</b> post in:
         <b style="color: #61afef">{{title}}</b><br>
 
-        <b style="color: purple">time</b> &nbsp;{{new Date(time)}}
+        <b style="color: purple">time</b> &nbsp;{{time}}
       </div>
       <hr>
       <div class="comment">

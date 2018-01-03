@@ -12,6 +12,9 @@
         <!-- start main content -->
         <div class="col-sm-6 col-md-6 col-lg-6">
           <router-view/>
+          <div class="" style="width:100%;height:60px;">
+
+          </div>
         </div>
         <!-- end main content -->
         <!-- start right sidebar -->
@@ -51,6 +54,7 @@ export default {
   text-align: center;
   /*color: #9d9d9d;*/
   background: #21252b;
+  height: 100%;
 }
 *{color:#9d9d9d }
 *:focus {outline:none}

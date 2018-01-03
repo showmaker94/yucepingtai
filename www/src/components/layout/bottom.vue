@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-inverse navbar-static-bottom">
+<nav class="navbar navbar-inverse navbar-static-bottom" >
   <p class="left">
                 © POWERED BY TINY-CALF 2017
                 <a href="http://coinbet.com">COINBET.COM</a>
@@ -36,12 +36,15 @@ export default {
 
 }
 
-p{text-align: center;line-height:50px;height: 50px;margin:0px;font-weight: bold}
+p{text-align: center;line-height:50px;height: 50px;margin:0px;font-weight: bold;}
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
   background-color: #21252b;
+  width: 100%;
 }
-.navbar{margin-bottom:0px}
+.navbar{margin-bottom:0px;  position: fixed;
+  bottom:0;width: 100%;}
+
 
 
 </style>

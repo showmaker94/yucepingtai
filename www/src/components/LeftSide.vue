@@ -17,7 +17,6 @@
 type 1 new 2 solved 3 closing 4 closed
 */
 import contract from "./format/mdContract.vue"
-import axios from "axios"
 export default {
   data(){
     return{
@@ -35,7 +34,7 @@ export default {
   },
   methods:{
     getnewData(){
-      axios.get('http://120.92.192.127:3000/api/shownew',{
+      this.$http.get('api/shownew',{
         params:{
             obj1:{
               isok:'1',
@@ -52,7 +51,7 @@ export default {
       })
     },
     getclosingData(){
-      axios.get('http://120.92.192.127:3000/api/showclosing',{
+      this.$http.get('api/showclosing',{
         params:{
             obj1:{
               isok:'1',

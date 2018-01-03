@@ -14,15 +14,6 @@
       <textarea class="form-control fontc" rows="6" v-model="desval"></textarea>
       <span class="glyphicon glyphicon-remove "  :class="{'erricon':desiserr}" aria-hidden="true" style="position:absolute;right:2%;top:10%"></span>
     </div>
-
-
-    <h4 class="title">开奖时间</h4>
-    <div class="pos fontc">
-      <datepicker :readonly="true" format="YYYY-MM-DD" v-model="resdateval" ref="resdate"></datepicker>
-      <span class="glyphicon glyphicon-remove fontc"  :class="{'erricon':resiserr}" aria-hidden="true" style="position:absolute;right:2%;top:40%"></span>
-    </div>
-
-
     <div class="" style="clear:both">
 
     </div>
@@ -80,16 +71,21 @@
     </div>
     <h4 class="title">你的押注选项</h4>
     <div class="pos">
-      <label  class="betop" for="yes"><input type="radio" name="betop" id="yes" v-model="pick" v-bind:value="'yes'">YES</label>
+      <label  class="betop" for="yes"><input type="radio" name="betop" id="yes" v-model="pick" v-bind:value="'yes'">YES</label>&nbsp;&nbsp;&nbsp;
       <label  class="betop" for="no"><input  type="radio" name="betop" id="no" v-model="pick" v-bind:value="'no'">NO</label>
       <div style="clear:both"></div>
       <span class="glyphicon glyphicon-remove "  :class="{'erricon':pickiserr}" aria-hidden="true" style="position:absolute;right:2%;top:40%"></span>
+    </div>
+    <h4 class="title">开奖时间</h4>
+    <div class="pos fontc">
+      <datepicker :readonly="true" format="YYYY-MM-DD" v-model="resdateval" ref="resdate"></datepicker>
+      <span class="glyphicon glyphicon-remove fontc"  :class="{'erricon':resiserr}" aria-hidden="true" style="position:absolute;right:2%;top:40%"></span>
     </div>
     <br>
     <br>
     <br>
     <br>
-    <p> <span class="stress">重要提示:</span>  所有合同必须以最少0.01BCC的投资，才会被批准</p>
+    <p> <span class="stress">重要提示:</span>  所有合同必须以最少0.01Tcash的投资，才会被批准</p>
     <p> <span class="stress">请填写有意义的合约，如果合约无任何意义将不会被通过</span></p>
     <button type="button" class="btn btn-primary" @click="checktitlevalue">提交</button>
   </div>
@@ -101,10 +97,12 @@ import axios from 'axios'
 export default {
   data(){
     return {
+      resdateval:'',
       pick:'',
       titleval:'',
       desval:'',
       outaddrval:'',
+      outaddrisok:'',
       enddateval:'',
       betendsdateval:'',
       weightvalue:'',
@@ -191,8 +189,8 @@ export default {
         bet:this.pick,
         cretime:''
       };
-      console.log(data);
-        axios.post('http://120.92.192.127:3000/api/creContract',data).then((res)=>{
+      // console.log(data);
+        this.$http.post('api/creContract',data).then((res)=>{
                 alert("创建成功，等待审核！");
                 this.$router.push("/")
 
@@ -204,11 +202,17 @@ export default {
 </script>
 
 <style lang="css">
+*{
+  margin: 0;
+  padding: 0;
+}
 .fontc{
   color: #9d9d9d;
 }
   .pos{
     position: relative;
+    width: 100%;
+    background: #282c34;
   }
   .erricon{
     display: none;
@@ -223,26 +227,17 @@ export default {
   .text { padding : 3px; }
 
   .title{font-weight: bold;text-align: left;}
-  /*select{
-    padding: 6px 12px;
-    background: white;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  }*/
   .option,.betop{
     float: left;
   }
   .betop{
     opacity: 1;
-    background-color: #333;
+    background-color: #282c34;
     cursor: pointer;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
+    display: inline-block;
+    width: 80px;
   }
   .createcontract input,.createcontract textarea{
     background: #282c34;
@@ -253,25 +248,51 @@ export default {
   .mypanel .navbar-nav > li > span{
     display: block;
     padding: 7px 10px;
-    width: 200px;
+    width: 170px;
   }
-  .mypanel .nav > li > span{
-    display: block;
-    border: 1px solid #9d9d9d;
-    color: #9d9d9d;
-  }
-  .mypanel .nav > li > span:focus, .mypanel .nav > li > span:hover{
-      background-color: #282c34;;
+  @media screen and (max-width:500px) {
+    .createcontract .mypanel .nav > li > span{
+      display: block;
       border: 1px solid #9d9d9d;
+      color: #9d9d9d;
+      width: 92%;
+      margin: 0 auto;
+    }
+    .mypanel .nav > li > span:focus, .mypanel .nav > li > span:hover{
+        background-color: #282c34;
+        border: 1px solid #9d9d9d;
+        display: block;
+        width: 92%;
+        margin: 0 auto;
+    }
   }
-  .mypanel .nav .open > span, .mypanel .nav .open > span:focus, .mypanel .nav .open > span:hover{
-    background-color: #282c34;;
+  @media screen and (min-width:501px) {
+    .createcontract .mypanel .nav > li > span{
+      display: block;
+      border: 1px solid #9d9d9d;
+      color: #9d9d9d;
+      width: 200px;
+      margin: 0 auto;
+    }
+    .mypanel .nav > li > span:focus, .mypanel .nav > li > span:hover{
+        background-color: #282c34;
+        border: 1px solid #9d9d9d;
+        display: block;
+        width: 200px;
+        margin: 0 auto;
+    }
+  }
+
+  /*.mypanel .nav .open > span, .mypanel .nav .open > span:focus, .mypanel .nav .open > span:hover{
+    background-color: #fff;;
     border: 1px solid #9d9d9d;
-  }
+  }*/
   .navbar-inverse .navbar-nav>.open>span, .navbar-inverse .navbar-nav>.open>span:focus, .navbar-inverse .navbar-nav>.open>span:hover{
     background-color: #21252b;
+    padding: 10px;
   }
-  .mypanel .dropdown-menu li :hover { background-color: #5294e2}
+  .mypanel .dropdown-menu li {padding: 5px;}
+  .mypanel .dropdown-menu li :hover { background-color: #5294e2;width: 92%;margin: 0 auto;}
 
   .navbar-inverse .navbar-toggle {
     border-color: #444A58;
@@ -284,7 +305,13 @@ export default {
   .dropdown-menu{background-color: #383c4a;border-color:#626773;border-radius: 0px;}
   .dropdown-menu>li>span {display: block;color: #fff;text-align: center;}
   .open{display:block}
+  .datetime-picker input {
+    border: 1px solid #9d9d9d;
+  }
   *{
     color: #9d9d9d
+  }
+  input {
+    color: #9d9d9d;
   }
 </style>

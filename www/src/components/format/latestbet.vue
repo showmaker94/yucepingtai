@@ -6,7 +6,7 @@
       </div>
       <hr>
       <div class="comment">
-        <b>{{innum}}</b>BTC on <b>{{bet.toUpperCase()}}</b><b style="float:right">时间 &nbsp; {{new Date(time)}}</b>
+        <b>{{innum}}</b>Tcash on <b>{{bet.toUpperCase()}}</b><b style="float:right">时间 &nbsp; {{time}}</b>
       <br>
       </div>
     </div>

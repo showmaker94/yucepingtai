@@ -49,7 +49,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
     export default{
         data(){
             return{
@@ -64,7 +63,7 @@
         },
         methods:{
           showAllTitle(){
-            axios.get('http://localhost:3000/api/showAllContracts',{
+            this.$http.get('api/showAllContracts',{
               params:{
                 obj1:{},
                 obj2:{'cretime':-1}
@@ -76,7 +75,7 @@
           changeok(id){
             var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
             var isok=document.getElementById(id).value;
-            axios.get('http://localhost:3000/api/updateContractIsOk',{
+            this.$http.get('api/updateContractIsOk',{
               params:{
                 contract_id:contract_id,
                 isok:isok
@@ -94,13 +93,13 @@
         changestatus(id){
           var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
           var currentstatus=document.getElementById(id).value;
-          axios.get('http://localhost:3000/api/updateContractStatus',{
+          this.$http.get('api/updateContractStatus',{
             params:{
               contract_id:contract_id,
               currentstatus:currentstatus
             }
           }).then((res)=>{
-            console.log(res.data);
+            // console.log(res.data);
           if (res.data==null) {
             alert("修改失败")
           }else {
@@ -120,7 +119,7 @@
         var r=confirm("确定要删除吗？")
         if (r==true) {
           var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
-          axios.get('http://localhost:3000/remove',{
+          this.$http.get('remove',{
             params:{
               contract_id:contract_id
             }
@@ -141,7 +140,7 @@
       setbegindate(id){
         var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
         var begindate=document.getElementById(id).value;
-        axios.get('http://localhost:3000/api/updateContractBeginDate',{
+        this.$http.get('api/updateContractBeginDate',{
           params:{
             contract_id:contract_id,
             begindate:begindate
