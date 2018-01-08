@@ -54,7 +54,8 @@ export default {
         var contract_id=this.$route.params.contract_id;
         var yesorno=this.$route.params.yesorno;
         var outaddr=this.outaddr;
-        var title = this.title
+        var title = this.title;
+        var name = 'tch';
         var that=this;
         if (outaddr.trim()!='') {
           this.$http.get("api/insertbet",{
@@ -62,7 +63,8 @@ export default {
               contract_id:contract_id,
               yesorno:yesorno,
               outaddr:outaddr,
-              title:title
+              title:title,
+              name:name
             }
           }).then(function(res){
             // console.log(typeof res);

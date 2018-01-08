@@ -12,7 +12,7 @@ var mytime = require('./../public/javascripts/log.js');
 // })
 exports.getaddr = () => {
   return new Promise((resolve, reject) => {
-    http.get('http://120.92.192.127:1990/v1/getnewaddress?name=tch', function(req, res) {
+    http.get('http://47.104.78.189:1990/v1/getnewaddress?name=tch', function(req, res) {
       var html = '';
       req.on('data', function(data) {
         html += data;
@@ -39,11 +39,12 @@ exports.sendcoin = (data) => {
     //   "to":"mrc8mmL3BkXh3WbrYXgNnWjuPsmrUmNP5y",
     //   "amount":"1"
     // };
-    // console.log(data);
+    console.log(data);
     data = JSON.stringify(data);
+    console.log(data);
     var opt = {
       method: "POST",
-      host: "120.92.192.127",
+      host: "47.104.78.189",
       port: 1990,
       path: "/v1/sendtransaction",
       headers: {
@@ -81,10 +82,11 @@ exports.getinfo = function() {
   var zmq = require('zmq'),
     sock = zmq.socket('pull');
 
-  sock.connect('tcp://120.92.192.127:1999');
+  sock.connect('tcp://47.104.78.189:1999');
   console.log('Subscriber connected to port 1999');
   //
   sock.on('message', function(message) {
+    console.log(message);
     //   var message={
     //     "name":"rbtc",
     //   "category":"receive",
@@ -95,74 +97,97 @@ exports.getinfo = function() {
     // }
     // console.log(message);
     message = message.toString();
-    console.log(message);
     message = JSON.parse(message);
     // 当接收到消息时对数据库进行修改
+    console.log(message);
     var name = message.name;
     var category = message.category;
     var address = message.address;
     var amount = message.amount;
     var confirmations = message.confirmations;
-    var obj1 = {};
-    var obj2 = {};
+    var txid = message.txid;
     var bet = '';
     var innum = '';
     var isjoin = '1';
     var id = ''
-    obj1.inaddr = address;
-    obj1 = JSON.stringify(obj1);
-    obj2 = JSON.stringify(obj2);
-    db.searchBet(obj1, obj2) //查到inaddr的押注
+    //先查询是否有这个TXID，如果有，那么更新里面的确认数confirmations
+    db.searchConfirmOrderByTXID(txid)
       .then((ret) => {
-        // console.log(ret);
-        // console.log(11111);
-        return db.updateBet(ret[0].inaddr, amount) //更新Bet表数据
-        // res.json(ret)
-      })
-      .then((ret) => {
-        //查找到合约表
-        // console.log(222222222);
-        bet = ret.bet; //记录该条数据押注 yes  还是  no
-        innum = ret.innum; //记录 押入的 BCC 数量
-        // console.log(innum);
-        id = ret.contract_id;
-        return db.searchContractById(ret.contract_id);
-      })
-      .then((ret) => {
-        // console.log(ret);
-        //更新合约表数据
-        // console.log(333333);
-        return db.updateContract(ret[0]._id, ret[0].totalbet, ret[0].totalyesbet, ret[0].totalnobet, ret[0].totalbetnum, ret[0].nobetnum, ret[0].yesbetnum, bet, amount, isjoin);
-      })
-      .then((ret) => {
-        //查数据
-        return db.searchContractById(id);
-      })
-      .then((ret) => {
-        //在次更新Bet表，更新outnum字段
-        // console.log(444444444);
-        // console.log(ret);
-        var outnum = 0;
-        console.log(bet);
-        if (bet == 'yes') {
-          // console.log(ret[0].totalbet);
-          // console.log(ret[0].totalyesbet);
-          // console.log(innum);
-          outnum = ((((ret[0].totalbet) * 0.98) / (ret[0].totalyesbet)) * amount).toFixed(5);
-          // console.log(outnum);
-        } else if (bet == 'no') {
-          outnum = ((((ret[0].totalbet) * 0.98) / (ret[0].totalnobet)) * amount).toFixed(5);
+        if (ret == -1) {
+          //如果没有，在这里将得到的数据存入ConfirmOrder表中
+          db.insertConfirmOrder(name, category, address, amount, confirmations, txid)
+        } else {
+          //如果有，则判断确认数是否到达6  不够6 则进行数据库更新
+          if (ret[0].confirmations <= 6) {
+            // console.log("------------" + ret[0].txid + "----------" + ret[0].confirmations);
+            db.updateConfirmOrderByTXID(ret[0].txid, confirmations)
+          }
+          if (ret[0].confirmations > 6) {
+            // console.log("++++++++" + ret[0].txid + "++++++++++" + ret[0].confirmations);
+            console.log("***********************");
+            //判断isok字段是否wei0  0表示未添加   1表示已经添加
+            db.searchConfirmOrderByTXID(ret[0].txid)
+              .then(ret => {
+                if (ret[0].isok == 1) {
+                  console.log("已经添加过了该笔充值");
+                } else {
+                  db.updateConfirmOrderIsokByTXID(ret[0].txid, '1')
+                    .then((ret) => {
+                      //isok确定为1
+                      /*将amount数量添加到用户的押注地址中*/
+                      var obj1 = {};
+                      var obj2 = {};
+                      obj1.inaddr = ret.address;
+                      obj1 = JSON.stringify(obj1);
+                      obj2 = JSON.stringify(obj2);
+                      return db.searchBet(obj1, obj2)
+                    })
+                    .then((ret) => {
+                      return db.updateBet(ret[0].inaddr, amount) //更新Bet表数据
+                    })
+                    .then((ret) => {
+                      //查找到合约表
+                      bet = ret.bet; //记录该条数据押注 yes  还是  no
+                      innum = ret.innum; //记录 押入的 BCC 数量
+                      // console.log(innum);
+                      id = ret.contract_id;
+                      return db.searchContractById(ret.contract_id);
+                    })
+                    .then((ret) => {
+                      //更新合约表数据
+                      return db.updateContract(ret[0]._id, ret[0].totalbet, ret[0].totalyesbet, ret[0].totalnobet, ret[0].totalbetnum, ret[0].nobetnum, ret[0].yesbetnum, bet, amount, isjoin);
+                    })
+                    .then((ret) => {
+                      //查数据
+                      return db.searchContractById(id);
+                    })
+                    .then((ret) => {
+                      //在次更新Bet表，更新outnum字段
+                      var outnum = 0;
+                      if (bet == 'yes') {
+                        outnum = ((((ret[0].totalbet) * 0.98) / (ret[0].totalyesbet)) * amount).toFixed(5);
+                      } else if (bet == 'no') {
+                        outnum = ((((ret[0].totalbet) * 0.98) / (ret[0].totalnobet)) * amount).toFixed(5);
+                      }
+                      return db.updateBet(address, amount, outnum);
+                    })
+                    .then((ret) => {})
+                    .catch((err) => {
+                      console.log(err);
+                    })
+                }
+              })
+
+          }
         }
-        return db.updateBet(address, amount, outnum);
       })
-      .then((ret) => {
-        // console.log(55555555555);
-        // console.log(ret);
-        // res.json(ret)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+
+
+
+
+
+
+
 
 
   });

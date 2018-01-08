@@ -12,7 +12,8 @@ var betSchema = new mongoose.Schema({
   isok: String,
   isjoin: String,
   contract_id: String,
-  isout: String
+  isout: String,
+  name: String
 });
 
 /*

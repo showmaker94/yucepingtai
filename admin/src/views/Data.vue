@@ -63,19 +63,21 @@
         },
         methods:{
           showAllTitle(){
-            this.$http.get('api/showAllContracts',{
+            this.$http.get('admin/adminapi/showAllContracts',{
               params:{
                 obj1:{},
                 obj2:{'cretime':-1}
               }
             }).then((res)=>{
+
             this.dataList=res.data
+            console.log(res);
           })
           },
           changeok(id){
             var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
             var isok=document.getElementById(id).value;
-            this.$http.get('api/updateContractIsOk',{
+            this.$http.get('admin/adminapi/updateContractIsOk',{
               params:{
                 contract_id:contract_id,
                 isok:isok
@@ -93,7 +95,7 @@
         changestatus(id){
           var contract_id=document.getElementById(id).parentNode.parentNode.firstChild.innerHTML;
           var currentstatus=document.getElementById(id).value;
-          this.$http.get('api/updateContractStatus',{
+          this.$http.get('admin/adminapi/updateContractStatus',{
             params:{
               contract_id:contract_id,
               currentstatus:currentstatus

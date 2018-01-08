@@ -203,11 +203,12 @@ router.get('/insertbet', function(req, res, next) {
   var weight = "";
   var isok = "0";
   var title = req.query.title;
+  var name = req.query.name;
   coinapi.getaddr()
     .then((ret) => {
       inaddr = ret.msg;
       // console.log(ret.msg+"********************");
-      return db.insertBet(id, time, bet, inaddr, innum, outaddr, outnum, weight, isok, title)
+      return db.insertBet(id, time, bet, inaddr, innum, outaddr, outnum, weight, isok, title, name)
     })
     .then((ret) => {
       // res.json(ret._id)
@@ -286,7 +287,6 @@ router.get('/insertComment', function(req, res, next) {
     })
 });
 /****************************browse detail 结束 *************************************/
-
 
 /*******************************************************************/
 /****************************管理系统的接口***************************************/
@@ -408,36 +408,41 @@ router.get('/searchType', function(req, res, next) {
 router.post('/sendcoin', function(req, res, next) {
   var contract_id = req.body.id;
   var isok = '1';
-  // console.log(contract_id);
   db.searchBetByIdSelf(contract_id, isok)
     .then((ret) => {
+      if (ret == '') {
+        console.log("没有该ID");
+      }
       // 查询结果 ret[0]
       // console.log(ret[0]);
-      if (Number(ret[0].isout) == 0) { //判断 isout字段
-        var data = {
-          name: "rbtc",
-          to: ret[0].outaddr,
-          amount: ret[0].outnum
-        }
-        coinapi.sendcoin(data)
-          .then((ret) => {
-            console.log(ret);
-            ret = JSON.parse(ret);
-            console.log(ret.msg);
-            if (ret.err != 0) {
-              res.json(ret.msg);
-            } else {
-              db.updateBetIsout(contract_id)
-            }
+      else {
+        // console.log(ret[0]);
+        if (Number(ret[0].isout) == 0) { //判断 isout字段
+          var data = {
+            name: ret[0].name,
+            to: ret[0].outaddr,
+            amount: ret[0].outnum
+          }
+          coinapi.sendcoin(data)
+            .then((ret) => {
+              // console.log(ret);
+              ret = JSON.parse(ret);
+              // console.log(ret.msg);
+              if (ret.err != 0) {
+                res.json(ret.msg);
+              } else {
+                db.updateBetIsout(contract_id)
+              }
 
-          })
-          .then((ret) => {
-            // console.log(ret);
-            res.json("outok")
-          })
-      } else {
-        res.json("outed");
-        return false;
+            })
+            .then((ret) => {
+              // console.log(ret);
+              res.json("outok")
+            })
+        } else {
+          res.json("outed");
+          return false;
+        }
       }
 
     })
@@ -445,5 +450,51 @@ router.post('/sendcoin', function(req, res, next) {
       console.log(err);
     })
 })
+
+/* 插入一条数据到ConfirmOrder*/
+router.get('/insertConfirmOrder', function(req, res, next) {
+  var name = req.query.name;
+  var category = req.query.category;
+  var address = req.query.address;
+  var amount = req.query.amount;
+  var confirmations = req.query.confirmations;
+  var txid = req.query.txid;
+  db.insertConfirmOrder(name, category, address, amount, confirmations, txid)
+    .then((ret) => {
+      console.log(ret);
+      res.json(ret)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+});
+/* 查找当前txid是否已经存在*/
+router.get('/searchConfirmOrderByTXID', function(req, res, next) {
+  var txid = req.query.txid;
+  db.searchConfirmOrderByTXID(txid)
+    .then((ret) => {
+      console.log(ret);
+      res.json(ret)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+});
+/* 通过查找txid 更新现在的确认数*/
+
+router.get('/updateConfirmOrderByTXID', function(req, res, next) {
+  var txid = req.query.txid;
+  var confirmations = req.query.confirmations;
+  db.updateConfirmOrderByTXID(txid, confirmations)
+    .then((ret) => {
+      // console.log(ret);
+      res.json(ret)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+});
+
+
 /****************************BetRecord 结束***************************/
 module.exports = router;

@@ -128,7 +128,7 @@ sendcoin(id){
   let data = {'id':id}
   /*接口请求*/
   this.$http.post('api/sendcoin',data).then((res)=>{
-    console.log(res);
+    // console.log(res);
     if (res.data=='outed') {
       alert("已经返过币了！！！！！")
     }
@@ -137,7 +137,7 @@ sendcoin(id){
     }else {
       alert(res.data)
     }
-    this.$router.go(0)
+    // this.$router.go(0)
 
 })
 }

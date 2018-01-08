@@ -58,6 +58,7 @@ export default {
           }else{
               let data = {'username':this.username,'password':this.password}
               /*接口请求*/
+
               this.$http.post('checkuser',data).then((res)=>{
                   // console.log(res)
                /*接口的传值是(-1,该用户不存在),(0,密码错误)，同时还会检测管理员账号的值*/
@@ -73,6 +74,7 @@ export default {
                 }else{
                     this.tishi = "登录成功"
                     this.showTishi = true
+                    document.cookie="user="+""
                     this.$router.push('/data')
                 }
             })

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Search = mongoose.model('Search');
 var MyComment = mongoose.model('Comment');
 var Bet = mongoose.model('Bet');
+var ConfirmOrder = mongoose.model('ConfirmOrder');
 
 /*××××××××××××××××××contract 表的操作*××××××××××××××××××××××××*/
 /*创建合约*/
@@ -288,7 +289,7 @@ exports.searchBetByIdSelf = (contract_id, isok) => {
 /**/
 
 /*插入押注*/
-exports.insertBet = (id, time, bet, inaddr, innum, outaddr, outnum, weight, isok, title) => {
+exports.insertBet = (id, time, bet, inaddr, innum, outaddr, outnum, weight, isok, title, name) => {
   return new Promise((resolve, reject) => {
     var obj = new Bet({
       contract_id: id,
@@ -302,7 +303,8 @@ exports.insertBet = (id, time, bet, inaddr, innum, outaddr, outnum, weight, isok
       isok: isok,
       isjoin: '0',
       isout: '0',
-      title: title
+      title: title,
+      name: name
     });
     obj.save(function(err, res) {
 
@@ -385,7 +387,7 @@ exports.updateBet = (address, amount, outnum) => {
     })
   })
 }
-
+/*按照押注类型进行查询*/
 exports.searchType = (type, contract_id) => {
   return new Promise((resolve, reject) => {
     // var sid=mongoose.Types.ObjectId(contract_id)
@@ -403,7 +405,80 @@ exports.searchType = (type, contract_id) => {
     });
   })
 }
+/*插入一条数据到确认交易表*/
+exports.insertConfirmOrder = (name, category, address, amount, confirmations, txid) => {
+  return new Promise((resolve, reject) => {
+    var obj = new ConfirmOrder({
+      name: name,
+      category: category,
+      address: address,
+      amount: amount,
+      confirmations: confirmations,
+      txid: txid,
+      isok: 0
+    });
+    obj.save(function(err, res) {
 
+      if (err) {
+        console.log("Error:" + err);
+        return reject(err)
+      } else {
+        console.log("Res:" + res);
+        return resolve(res);
+      }
+    });
+
+  })
+}
+/*查询是否已经有了当前的TXID*/
+exports.searchConfirmOrderByTXID = (txid) => {
+  return new Promise((resolve, reject) => {
+    var obj = {};
+    obj.txid = txid;
+    ConfirmOrder.find(obj, (err, docs) => {
+      if (err) return reject(err);
+      // console.log(docs);
+      if (docs == '') {
+        return resolve(-1); //返回-1没找到 相应的txid
+      } else {
+        return resolve(docs);
+      }
+
+    })
+  })
+}
+/*通过寻找txid 更新确认数*/
+exports.updateConfirmOrderByTXID = (txid, confirmations) => {
+  return new Promise((resolve, reject) => {
+    var obj = {};
+    obj.confirmations = confirmations;
+    ConfirmOrder.findOneAndUpdate({
+      txid: txid
+    }, {
+      $set: obj
+    }, function(err, docs) {
+      if (err) return reject(err);
+      if (docs == '') return resolve(-1) //没找到则返回-1
+      return resolve(docs);
+    })
+  })
+}
+/*确认数超过6 通过TXID查找 更新isok字段*/
+exports.updateConfirmOrderIsokByTXID = (txid, isok) => {
+  return new Promise((resolve, reject) => {
+    var obj = {};
+    obj.isok = isok;
+    ConfirmOrder.findOneAndUpdate({
+      txid: txid
+    }, {
+      $set: obj
+    }, function(err, docs) {
+      if (err) return reject(err);
+      if (docs == '') return resolve(-1) //没找到则返回-1
+      return resolve(docs);
+    })
+  })
+}
 /************************users**********************************/
 
 /*****************************************************************/

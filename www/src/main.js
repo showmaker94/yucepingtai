@@ -6,6 +6,7 @@ import router from './router'
 
 import Axios from 'axios'
 Axios.defaults.baseURL = 'http://47.104.78.189:3000/'
+// Axios.defaults.baseURL = 'http://192.168.1.213:3000/'
 //localize plugin vue-i18n
 import VueI18n from 'vue-i18n'
 import messages from './i18n.js'
